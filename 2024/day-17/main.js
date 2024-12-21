@@ -7,6 +7,15 @@ const lines = readFile(FILE_NAME)
 const registers = []
 let program = []
 
+const xor = (n2, n1) => {
+  const shift = 2 ** 31
+  const n1h = Math.trunc(n1 / shift)
+  const n2h = Math.trunc(n2 / shift)
+  const n1l = n1 % shift
+  const n2l = n2 % shift
+  return shift * new Number(n1h ^ n2h) + new Number(n1l ^ n2l)
+}
+
 for (let i = 0; i < lines.length; i++) {
   const line = lines[i]
   if (line.includes('Register')) {
@@ -41,10 +50,10 @@ while (pointer >= 0 && pointer < program.length) {
       registers[0] = Math.trunc(registers[0] / Math.pow(2, comboOperand))
       break;
     case 1:
-      registers[1] = registers[1] ^ operand
+      registers[1] = xor(registers[1], operand)
       break;
     case 2:
-      registers[1] = ((comboOperand % 8) + 8) % 8
+      registers[1] = comboOperand % 8
       break;
     case 3:
       if (registers[0] !== 0) {
@@ -52,10 +61,10 @@ while (pointer >= 0 && pointer < program.length) {
       }
       break;
     case 4:
-      registers[1] = registers[1] ^ registers[2]
+      registers[1] = xor(registers[1], registers[2])
       break;
     case 5:
-      result.push(((comboOperand % 8) + 8) % 8)
+      result.push(comboOperand % 8)
       break;
     case 6:
       registers[1] = Math.trunc(registers[0] / Math.pow(2, comboOperand))
