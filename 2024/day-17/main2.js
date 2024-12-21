@@ -7,6 +7,15 @@ const lines = readFile(FILE_NAME)
 const registers = []
 let program = []
 
+const xor = (n2, n1) => {
+  const shift = 2 ** 32
+  const n1h = Math.trunc(n1 / shift)
+  const n2h = Math.trunc(n2 / shift)
+  const n1l = n1 % shift
+  const n2l = n2 % shift
+  return shift * new Number(n1h ^ n2h) + new Number(n1l ^ n2l)
+}
+
 for (let i = 0; i < lines.length; i++) {
   const line = lines[i]
   if (line.includes('Register')) {
@@ -33,26 +42,26 @@ while (pw >= 0) {
     let c
     let i = 0
     do {
-      b = ((a % 8) + 8) % 8
-      b = b ^ 5
-      c = Math.trunc(a / Math.pow(2, b))
-      b = b ^ 6
+      b = a % 8
+      b = xor(b, 5)
+      c = Math.trunc(a / (2 ** b))
+      b = xor(b, 6)
       a = Math.trunc(a / 8)
-      b = b ^ c
+      b = xor(b, c)
       i++
     } while (i <= pw && a !== 0)
 
-    if (i === pw + 1 && (((b % 8) + 8) % 8) === program[pw]) {
+    if (i === pw + 1 && (b % 8) === program[pw]) {
       found = true
       pw--
     } else {
       while (countArray[pw] === 7) {
-        aValue -= 7 * Math.pow(8, pw)
+        aValue -= 7 * (8 ** pw)
         countArray[pw] = 0
         pw++
       }
       countArray[pw]++
-      aValue += Math.pow(8, pw)
+      aValue += 8 ** pw
     }
   }
 }
@@ -79,13 +88,13 @@ while (pointer >= 0 && pointer < program.length) {
 
   switch (opcode) {
     case 0:
-      registers[0] = Math.trunc(registers[0] / Math.pow(2, comboOperand))
+      registers[0] = Math.trunc(registers[0] / (2 ** comboOperand))
       break;
     case 1:
-      registers[1] = registers[1] ^ operand
+      registers[1] = xor(registers[1], operand)
       break;
     case 2:
-      registers[1] = ((comboOperand % 8) + 8) % 8
+      registers[1] = comboOperand % 8
       break;
     case 3:
       if (registers[0] !== 0) {
@@ -93,16 +102,16 @@ while (pointer >= 0 && pointer < program.length) {
       }
       break;
     case 4:
-      registers[1] = registers[1] ^ registers[2]
+      registers[1] = xor(registers[1], registers[2])
       break;
     case 5:
-      result.push(((comboOperand % 8) + 8) % 8)
+      result.push(comboOperand % 8)
       break;
     case 6:
-      registers[1] = Math.trunc(registers[0] / Math.pow(2, comboOperand))
+      registers[1] = Math.trunc(registers[0] / (2 ** comboOperand))
       break;
     case 7:
-      registers[2] = Math.trunc(registers[0] / Math.pow(2, comboOperand))
+      registers[2] = Math.trunc(registers[0] / (2 ** comboOperand))
       break;
   }
   pointer += 2
