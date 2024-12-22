@@ -1,4 +1,4 @@
-import { readFile } from './file-utils'
+import { readFile } from '../../utils/javascript/file-utils'
 
 const isExample = false
 

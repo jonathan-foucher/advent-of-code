@@ -1,4 +1,4 @@
-import { readFile } from './file-utils'
+import { readFile } from '../../utils/javascript/file-utils'
 
 const isExample = false
 const FILE_NAME = isExample ? 'input/example.txt' :'input/input.txt' 
