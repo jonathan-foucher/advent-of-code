@@ -22,52 +22,51 @@ for (let i = 0; i < lines.length; i++) {
 
 let swaps = []
 
-const checkBit = (counter, maxDepth, inputs) => {
+const checkBit = (counter, maxDepth, prevInputs) => {
   if (maxDepth < counter) {
     return
   }
   
-  const iStr = ("0" + counter).slice(-2)
-  const iPrevStr = ("0" + (counter - 1)).slice(-2)
+  const cStr = ("0" + counter).slice(-2)
+  const cPrevStr = ("0" + (counter - 1)).slice(-2)
   
-  const inputsAnd = outputs.get(inputs.join(' AND ')) || outputs.get(inputs.reverse().join(' AND '))
+  const prevCarry = outputs.get(prevInputs.join(' AND ')) || outputs.get(prevInputs.reverse().join(' AND '))
   
-  const prevAnd = outputs.get(`x${iPrevStr} AND y${iPrevStr}`) || outputs.get(`y${iPrevStr} AND x${iPrevStr}`)
+  const carry = outputs.get(`x${cPrevStr} AND y${cPrevStr}`) || outputs.get(`y${cPrevStr} AND x${cPrevStr}`)
   
-  const or = outputs.get([inputsAnd, prevAnd].join(' OR ')) || outputs.get([prevAnd, inputsAnd].join(' OR '))
+  const nextCarry = outputs.get([prevCarry, carry].join(' OR ')) || outputs.get([carry, prevCarry].join(' OR '))
   
-  let xor = outputs.get(`x${iStr} XOR y${iStr}`) || outputs.get(`y${iStr} XOR x${iStr}`)
+  let add = outputs.get(`x${cStr} XOR y${cStr}`) || outputs.get(`y${cStr} XOR x${cStr}`)
   
-  const xorXor = counter === 0 ? xor
-    : counter === 1 ? (outputs.get([xor, prevAnd].join(' XOR ')) || outputs.get([prevAnd, xor].join(' XOR ')))
-    : (outputs.get([or, xor].join(' XOR ')) || outputs.get([xor, or].join(' XOR ')))
+  let inputs = counter === 0 ? [ 'x00', 'y00' ]
+    : counter === 1 ? [ add, carry ]
+    : [ add, nextCarry ]
+  const finalAdd = outputs.get(inputs.join(' XOR ')) || outputs.get(inputs.reverse().join(' XOR '))
 
-  if (xorXor && xorXor !== `z${iStr}`) {
-    const opXorXor = ops.get(xorXor)
-    const opZ = ops.get(`z${iStr}`)
-    outputs.set(opXorXor, `z${iStr}`)
-    outputs.set(opZ, xorXor)
+  if (finalAdd && finalAdd !== `z${cStr}`) {
+    const opFinalAdd = ops.get(finalAdd)
+    const opZ = ops.get(`z${cStr}`)
+    outputs.set(opFinalAdd, `z${cStr}`)
+    outputs.set(opZ, finalAdd)
     
-    swaps.push(xorXor)
-    swaps.push(`z${iStr}`)
+    swaps.push(finalAdd)
+    swaps.push(`z${cStr}`)
   }
   
-  if (counter !== maxDepth && !xorXor && !ops.get(`z${iStr}`).split(' XOR ').includes(xor)) {
-    const zPartToSwap = ops.get(`z${iStr}`).split(' XOR ').filter(key => key !== or)[0]
-    const opXor = ops.get(xor)
-    const opZSwap = ops.get(zPartToSwap)
-    outputs.set(opZSwap, xor)
-    outputs.set(opXor, zPartToSwap)
-    
-    swaps.push(xor)
-    swaps.push(zPartToSwap)
-    xor = zPartToSwap
+  if (counter !== maxDepth && !finalAdd && !ops.get(`z${cStr}`).split(' XOR ').includes(add)) {
+    const zInputs = ops.get(`z${cStr}`).split(' XOR ').filter(key => key !== nextCarry)[0]
+    const opAdd = ops.get(add)
+    const opZ = ops.get(zInputs)
+    outputs.set(opZ, add)
+    outputs.set(opAdd, zInputs)
+
+    swaps.push(add)
+    swaps.push(zInputs)
+    add = zInputs
+    inputs = [ add, nextCarry ]
   }
-  
-  const nextInputs = counter === 0 ? [ 'x00', 'y00' ]
-    : counter === 1 ? [ xor, prevAnd ]
-    : [xor, or]
-  checkBit(counter + 1, maxDepth, nextInputs)
+
+  checkBit(counter + 1, maxDepth, inputs)
 }
 
 checkBit(0, nbGates - 1, [])
