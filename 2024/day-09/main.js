@@ -27,7 +27,7 @@ for (let i = 0; i < j; i++) {
     j--
   }
 }
- 
+
 let result = 0
 j = results.length
 for (let i = 0; i < j; i++) {

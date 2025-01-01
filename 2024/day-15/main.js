@@ -31,7 +31,7 @@ for (let i = 0; i < map.length; i++) {
 
 instructions = instructions.flatMap(e => e)
 
-for (let i = 0; i < instructions.length; i++) {  
+for (let i = 0; i < instructions.length; i++) {
   let delta
   switch (instructions[i]) {
     case '>':
@@ -47,14 +47,14 @@ for (let i = 0; i < instructions.length; i++) {
       delta = [ 0, 1 ]
       break;
   }
-  
+
   let nextCase = map[robot.y + delta[1]][robot.x + delta[0]]
   const boxes = []
   while(nextCase.value === 'O') {
     boxes.push(nextCase)
     nextCase = map[nextCase.y + delta[1]][nextCase.x + delta[0]]
   }
-  
+
   if (nextCase.value !== '#') {
     while (boxes.length > 0) {
       const box = boxes[boxes.length - 1]
@@ -74,7 +74,7 @@ for (let i = 0; i < map.length; i++) {
   for (let j = 0; j < map[0].length; j++) {
     if (map[i][j].value === 'O') {
       result+= map[i][j].x + map[i][j].y * 100
-    } 
+    }
   }
 }
 

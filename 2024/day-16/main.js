@@ -46,7 +46,7 @@ const updatePossibilities = (possibilities) => {
       ) {
         const newCase = map[possibility.y][possibility.x - 1]
         const newScore = possibility.score + (possibility.direction !== '<' ? 1001 : 1)
-        
+
         const bestScore = bestCaseScores.get(newCase.key)
         if (!bestScore || newScore < bestScore) {
           isUpdatedResult = true
@@ -69,7 +69,7 @@ const updatePossibilities = (possibilities) => {
       ) {
         const newCase = map[possibility.y - 1][possibility.x]
         const newScore = possibility.score + (possibility.direction !== '^' ? 1001 : 1)
-        
+
         const bestScore = bestCaseScores.get(newCase.key)
         if (!bestScore || newScore < bestScore) {
           isUpdatedResult = true
@@ -92,7 +92,7 @@ const updatePossibilities = (possibilities) => {
       ) {
         const newCase = map[possibility.y + 1][possibility.x]
         const newScore = possibility.score + (possibility.direction !== 'v' ? 1001 : 1)
-        
+
         const bestScore = bestCaseScores.get(newCase.key)
         if (!bestScore || newScore < bestScore) {
           isUpdatedResult = true
@@ -115,7 +115,7 @@ const updatePossibilities = (possibilities) => {
       ) {
         const newCase = map[possibility.y][possibility.x + 1]
         const newScore = possibility.score + (possibility.direction !== '>' ? 1001 : 1)
-        
+
         const bestScore = bestCaseScores.get(newCase.key)
         if (!bestScore || newScore < bestScore) {
           isUpdatedResult = true

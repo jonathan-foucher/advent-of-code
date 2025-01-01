@@ -4,7 +4,7 @@ const FILE_NAME = 'input/input.txt'
 
 const lines = readFile(FILE_NAME)
 
-const NUM_PAD = [ 
+const NUM_PAD = [
   { value: '7', x: 0, y: 0 },
   { value: '8', x: 1, y: 0 },
   { value: '9', x: 2, y: 0 },
@@ -30,7 +30,7 @@ const countSeq = (seq, depth, isNumPad) => {
   if (depth === 0) {
     return seq.length
   }
-  
+
   const currentPad = isNumPad ? NUM_PAD : DIR_PAD
 
   let counter = 0
@@ -69,7 +69,7 @@ const countSeq = (seq, depth, isNumPad) => {
       if (deltaY < 0) {
         const isTopGap = currentPad.filter(key => key.x === target.x - deltaX
           && key.y >= target.y && key.y < target.y - deltaY).length !== Math.abs(deltaY)
-        
+
         if (!isTopGap) {
           while (deltaY < 0) {
             newSeq += '^'

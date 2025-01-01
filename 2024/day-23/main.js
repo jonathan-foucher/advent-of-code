@@ -31,7 +31,7 @@ let result = 0
 for (let i = 0; i < computersConnections.length; i++) {
   const connection = computersConnections[i]
   const firstId = connection[0]
-  
+
   for (let j = 0; j < connection[1].length; j++) {
     const secondId = connection[1][j]
 

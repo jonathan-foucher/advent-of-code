@@ -1,6 +1,6 @@
 import { readFile } from '../../utils/javascript/file-utils'
 
-const FILE_NAME = 'input/input.txt' 
+const FILE_NAME = 'input/input.txt'
 
 const wires = new Map()
 
@@ -9,7 +9,7 @@ const gates = readFile(FILE_NAME).map(gate => {
     .split(' ')
     .filter(value => value !== value.toUpperCase() || !isNaN(parseInt(value)))
     .map(value => !isNaN(parseInt(value)) ? parseInt(value) : value)
-  
+
   const operation = gate.split('-> ')[0]
     .split(' ')
     .find(value => value === value.toUpperCase() && isNaN(parseInt(value)))
@@ -30,7 +30,7 @@ while (gates.some(gate => gate.result === undefined)) {
       && gate.inputWires.every(inputWire => !isNaN(inputWire) || wires.get(inputWire) !== undefined)) {
       const inputA = isNaN(gate.inputWires[0]) ? wires.get(gate.inputWires[0]) : gate.inputWires[0]
       const inputB = isNaN(gate.inputWires[1]) ? wires.get(gate.inputWires[1]) : gate.inputWires[1]
-      
+
       switch (gate.operation) {
         case 'AND':
           gate.result = inputA & inputB

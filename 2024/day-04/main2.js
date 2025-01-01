@@ -20,7 +20,7 @@ const isXMas = (char, row, col) => {
   if (char !== 'A' || row === 0 || row === matrix.length - 1 || col === 0 || col === matrix[0].length - 1) {
     return false
   }
-  const diag = matrix[row - 1][col - 1].value + char + matrix[row + 1][col + 1].value 
+  const diag = matrix[row - 1][col - 1].value + char + matrix[row + 1][col + 1].value
   const otherDiag = matrix[row - 1][col + 1].value  + char + matrix[row + 1][col - 1].value
 
   return diag.match(XMAS_REGEX) && otherDiag.match(XMAS_REGEX)

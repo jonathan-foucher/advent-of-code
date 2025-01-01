@@ -26,7 +26,7 @@ for (let i = 0; i < lines.length; i++) {
             return '@.'.split('')
         }
     }))
-    
+
   } else {
     instructions.push(line.split(''))
   }
@@ -113,7 +113,7 @@ for (let i = 0; i < instructions.length; i++) {
         return []
       })
     }
-    
+
     if (!isBlocked) {
       while (boxes.length > 0) {
         const box = boxes[boxes.length - 1]
@@ -135,7 +135,7 @@ for (let i = 0; i < map.length; i++) {
   for (let j = 0; j < map[0].length; j++) {
     if (map[i][j].value === '[') {
       result+= map[i][j].x + map[i][j].y * 100
-    } 
+    }
   }
 }
 

@@ -1,6 +1,6 @@
 import { readFile } from '../../utils/javascript/file-utils'
 
-const FILE_NAME = 'input/input.txt' 
+const FILE_NAME = 'input/input.txt'
 
 const inputs = readFile(FILE_NAME)
 

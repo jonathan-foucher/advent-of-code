@@ -1,7 +1,7 @@
 import { readFile } from '../../utils/javascript/file-utils'
 
 const isExample = false
-const FILE_NAME = isExample ? 'input/example.txt' :'input/input.txt' 
+const FILE_NAME = isExample ? 'input/example.txt' :'input/input.txt'
 const SIZE = isExample ? 6 : 70
 const NB_BYTES = isExample ? 12 : 1024
 
@@ -44,7 +44,7 @@ const updatePossibilities = (possibilities) => {
       ) {
         const newCase = map[possibility.y][possibility.x - 1]
         const newScore = possibility.score + 1
-        
+
         const bestScore = bestCaseScores.get(newCase.key)
         if (!bestScore || newScore < bestScore) {
           isUpdatedResult = true
@@ -66,7 +66,7 @@ const updatePossibilities = (possibilities) => {
       ) {
         const newCase = map[possibility.y - 1][possibility.x]
         const newScore = possibility.score + 1
-        
+
         const bestScore = bestCaseScores.get(newCase.key)
         if (!bestScore || newScore < bestScore) {
           isUpdatedResult = true
@@ -88,11 +88,11 @@ const updatePossibilities = (possibilities) => {
       ) {
         const newCase = map[possibility.y + 1][possibility.x]
         const newScore = possibility.score + 1
-        
+
         const bestScore = bestCaseScores.get(newCase.key)
         if (!bestScore || newScore < bestScore) {
           isUpdatedResult = true
-          
+
           const newPossibility = {
             x: newCase.x,
             y: newCase.y,
@@ -111,7 +111,7 @@ const updatePossibilities = (possibilities) => {
       ) {
         const newCase = map[possibility.y][possibility.x + 1]
         const newScore = possibility.score + 1
-        
+
         const bestScore = bestCaseScores.get(newCase.key)
         if (!bestScore || newScore < bestScore) {
           isUpdatedResult = true

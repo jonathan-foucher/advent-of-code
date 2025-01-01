@@ -1,6 +1,6 @@
 import { readFile } from '../../utils/javascript/file-utils'
 
-const FILE_NAME = 'input/input.txt' 
+const FILE_NAME = 'input/input.txt'
 
 const dimensions = readFile(FILE_NAME).map(line =>
   line.split('x').map(value => parseInt(value))

@@ -20,7 +20,7 @@ for (let i = 1; i < 10000; i++) {
     const robot = robots[j]
     robot.px = (robot.px + robot.vx) % MAX_WIDTH
     robot.py = (robot.py + robot.vy) % MAX_HEIGHT
-    
+
     if (robot.px < 0) {
       robot.px += MAX_WIDTH
     }
