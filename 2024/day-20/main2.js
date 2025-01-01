@@ -1,7 +1,7 @@
 import { readFile } from '../../utils/javascript/file-utils'
 
 const IS_EXAMPLE = false
-const FILE_NAME = IS_EXAMPLE ? 'input/example.txt' : 'input/input.txt' 
+const FILE_NAME = IS_EXAMPLE ? 'input/example.txt' : 'input/input.txt'
 const PICOSECONDS_THRESHOLD = IS_EXAMPLE ? 50 : 100
 const CHEAT_TIME = 20
 

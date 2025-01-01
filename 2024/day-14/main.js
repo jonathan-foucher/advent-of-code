@@ -25,14 +25,14 @@ for (let i = 0; i < robots.length; i++) {
   const robot = robots[i]
   robot.px = (robot.px + robot.vx * NUMBER_OF_SECONDS) % MAX_WIDTH
   robot.py = (robot.py + robot.vy * NUMBER_OF_SECONDS) % MAX_HEIGHT
-  
+
   if (robot.px < 0) {
     robot.px += MAX_WIDTH
   }
   if (robot.py < 0) {
     robot.py += MAX_HEIGHT
   }
-  
+
   if (robot.px < MID_WIDTH && robot.py < MID_HEIGHT) {
     quadrants[0]++
   }

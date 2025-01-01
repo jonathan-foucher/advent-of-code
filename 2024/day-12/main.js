@@ -57,7 +57,7 @@ for (let i = 0; i < height; i++) {
         alreadyCountedPlants.push(...nextPlants.map(nextPlant => nextPlant.key))
         nextPlants = nextPlants.flatMap(
           nextPlant => getNextPlants(matrix, nextPlant.row, nextPlant.col)
-            .filter(nextPlant => plant.value === nextPlant.value 
+            .filter(nextPlant => plant.value === nextPlant.value
               && !alreadyCountedPlants.includes(nextPlant.key)))
             .reduce((acc, val) => {
               if (!acc.map(p => p.key).includes(val.key)) {
@@ -70,7 +70,7 @@ for (let i = 0; i < height; i++) {
     }
   }
 }
-  
+
 let result = 0
 for (let i = 0; i < areas.length; i++) {
   const area = areas[i]

@@ -1,6 +1,6 @@
 import { readFile } from '../../utils/javascript/file-utils'
 
-const FILE_NAME = 'input/input.txt' 
+const FILE_NAME = 'input/input.txt'
 
 const lines = readFile(FILE_NAME)
 const Z_REGEX = /^z\d\d$/
@@ -14,7 +14,7 @@ for (let i = 0; i < lines.length; i++) {
     wires.set(line.split(': ')[0], parseInt(line.split(': ')[1]))
     continue
   }
-  
+
   if (line.includes('->')) {
     gates.push({
       input1: line.split(' -> ')[0].split(' ')[0],
@@ -36,7 +36,7 @@ while (gates.some(gate => gate.result === null)) {
 
     if (Number.isInteger(value1) && Number.isInteger(value2)) {
       let result
-      
+
       switch (gate.operation) {
         case 'AND':
           result = value1 & value2

@@ -99,7 +99,7 @@ for (let i = 0; i < height; i++) {
       guardCol = guardInitCol
       dir = 0
       matrix[i][j].isObstacle = true
-      
+
       let steps = 0
       do {
         moveGuard()

@@ -25,8 +25,8 @@ const MATRIX_HEIGHT = matrix.length
 const MATRIX_WIDTH = matrix[0].length
 
 const allFrequencies = []
-  
-matrix.forEach(row => 
+
+matrix.forEach(row =>
   row.forEach(col => {
     if (col.isAntenna) {
       if (!allFrequencies[col.value.charCodeAt(0)]) {

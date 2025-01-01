@@ -10,7 +10,7 @@ const updates = readFile(FILE_NAME)
   .filter(line => line.includes(','))
   .map(line => line.split(',').map(n => parseInt(n)))
 
-const isRespectingRules = (update) => rules.every(rule => !update.includes(rule[0]) || !update.includes(rule[1]) 
+const isRespectingRules = (update) => rules.every(rule => !update.includes(rule[0]) || !update.includes(rule[1])
   || update.indexOf(rule[0]) < update.indexOf(rule[1]))
 
 let result = updates.filter(update => !isRespectingRules(update))

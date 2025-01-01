@@ -1,6 +1,6 @@
 import { readFile } from '../../utils/javascript/file-utils'
 
-const FILE_NAME = 'input/input.txt' 
+const FILE_NAME = 'input/input.txt'
 
 const directions = readFile(FILE_NAME)[0].split('')
 
@@ -42,7 +42,7 @@ for (let i = 0; i < directions.length; i++) {
       }
       break
   }
-  
+
   const key = i % 2 === 0 ? `${x1}-${y1}` : `${x2}-${y2}`
   if (!visitedLocations.includes(key)) {
     visitedLocations.push(key)

@@ -1,6 +1,6 @@
 import { readFile } from '../../utils/javascript/file-utils'
 
-const FILE_NAME = 'input/input.txt' 
+const FILE_NAME = 'input/input.txt'
 
 const scores = new Map()
 const persons = []
@@ -11,9 +11,9 @@ readFile(FILE_NAME)
     const person = temp[0]
     const score = temp[1] === 'gain' ? parseInt(temp[2]) : - parseInt(temp[2])
     const otherPerson = line.split(' happiness units by sitting next to ')[1].replace('.', '')
-    
+
     scores.set(`${person}-${otherPerson}`, score)
-    
+
     if (!persons.includes(person)) {
       persons.push(person)
     }
@@ -29,7 +29,7 @@ const getBiggerScore = (persons, prevPerson, firstPerson) => {
   if (persons.length === 0) {
     return scores.get(`${prevPerson}-${firstPerson}`) + scores.get(`${firstPerson}-${prevPerson}`)
   }
-  
+
   return persons.map(person => {
     const score = prevPerson !== null ? scores.get(`${prevPerson}-${person}`)
       + scores.get(`${person}-${prevPerson}`) : 0

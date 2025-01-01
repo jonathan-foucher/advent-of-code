@@ -12,7 +12,7 @@ const updateStone = (value) => {
     const nDigits = strValue.length / 2
     return [ parseInt(strValue.slice(0, nDigits)), parseInt(strValue.slice(nDigits)) ]
   }
-  
+
   return [ value * 2024 ]
 }
 

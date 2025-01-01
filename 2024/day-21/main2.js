@@ -6,7 +6,7 @@ const lines = readFile(FILE_NAME)
 
 const NUMBER_OF_DIR_ROBOTS = 25
 
-const NUM_PAD = [ 
+const NUM_PAD = [
   { value: '7', x: 0, y: 0 },
   { value: '8', x: 1, y: 0 },
   { value: '9', x: 2, y: 0 },
@@ -35,7 +35,7 @@ const countSeq = (seq, depth, isNumPad) => {
     cache.set(`${seq}-${depth}`, seq.length)
     return seq.length
   }
-  
+
   const currentPad = isNumPad ? NUM_PAD : DIR_PAD
 
   let counter = 0
@@ -74,7 +74,7 @@ const countSeq = (seq, depth, isNumPad) => {
       if (deltaY < 0) {
         const isTopGap = currentPad.filter(key => key.x === target.x - deltaX
           && key.y >= target.y && key.y < target.y - deltaY).length !== Math.abs(deltaY)
-        
+
         if (!isTopGap) {
           while (deltaY < 0) {
             newSeq += '^'
@@ -96,7 +96,7 @@ const countSeq = (seq, depth, isNumPad) => {
       }
     }
     newSeq += 'A'
-    
+
     const key = `${newSeq}-${depth - 1}`
     let res = cache.get(key)
     if (!res) {

@@ -1,6 +1,6 @@
 import { readFile } from '../../utils/javascript/file-utils'
 
-const FILE_NAME = 'input/input.txt' 
+const FILE_NAME = 'input/input.txt'
 
 const NB_TURNS = 50
 
@@ -10,7 +10,7 @@ for (let i = 0; i < NB_TURNS; i++) {
   let result = ''
   let prevChar
   let count = 0
-  
+
   for (let j = 0; j <= str.length; j++) {
     const currentChar = str[j]
     if (j > 0 && currentChar !== prevChar) {
@@ -20,7 +20,7 @@ for (let i = 0; i < NB_TURNS; i++) {
     prevChar = currentChar
     count++
   }
-  
+
   str = result
 }
 

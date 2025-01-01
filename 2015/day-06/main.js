@@ -24,10 +24,10 @@ for (let i = 0; i < instructions.length; i++) {
     .replace('toggle ', '')
     .split(' through ')
     .map(coordinate => coordinate.split(',').map(value => parseInt(value)))
-  
+
   const xCoordinates = [ coordinates[0][0], coordinates[1][0] ]
   const yCoordinates = [ coordinates[0][1], coordinates[1][1] ]
-  
+
   for (let x = Math.min(...xCoordinates); x <= Math.max(...xCoordinates); x++) {
     for (let y = Math.min(...yCoordinates); y <= Math.max(...yCoordinates); y++) {
       lights[x][y] = isToggle ? !lights[x][y] : state

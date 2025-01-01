@@ -1,7 +1,7 @@
 import { readFile } from '../../utils/javascript/file-utils'
 
 const IS_EXAMPLE = false
-const FILE_NAME = IS_EXAMPLE ? 'input/example.txt' : 'input/input.txt' 
+const FILE_NAME = IS_EXAMPLE ? 'input/example.txt' : 'input/input.txt'
 const PICOSECONDS_THRESHOLD = IS_EXAMPLE ? 38 : 100
 
 const matrix = readFile(FILE_NAME).map(line => line.split(''))

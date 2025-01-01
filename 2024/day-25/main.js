@@ -1,6 +1,6 @@
 import { readFile } from '../../utils/javascript/file-utils'
 
-const FILE_NAME = 'input/input.txt' 
+const FILE_NAME = 'input/input.txt'
 
 const lines = readFile(FILE_NAME)
 
@@ -21,7 +21,7 @@ const locks = []
 let isKey = null
 for (let i = 0; i <= lines.length; i++) {
   const line = lines[i]
-  
+
   if (line === '' || i === lines.length) {
     if (isKey) {
       keys.push(counters)
@@ -37,7 +37,7 @@ for (let i = 0; i <= lines.length; i++) {
 
     continue
   }
-  
+
   if (isKey === null) {
     isKey = line.split('').some(char => char !== '#')
   }

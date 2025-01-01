@@ -37,7 +37,7 @@ const matrix = readFile(FILE_NAME)
 const result = matrix.flatMap(e => e).filter(e => e.value === 0)
   .map(startingPosition => {
     let res = [ startingPosition ]
-    
+
     let currentStep = 1
     do {
       res = res.flatMap(pos => getNextPositions(matrix, pos.row, pos.col))
@@ -51,7 +51,7 @@ const result = matrix.flatMap(e => e).filter(e => e.value === 0)
         differentRes.push(key)
       }
     })
-    
+
     return differentRes.length
   })
   .reduce((acc, val) => acc + val, 0)
