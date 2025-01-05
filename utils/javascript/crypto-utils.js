@@ -1,16 +1,5 @@
-const leftBitsRotate = (inputNumber, nRotation, totalBits) => {
-  nRotation = nRotation % totalBits;
-  const inputBits = inputNumber.toString(2).padStart(totalBits, '0')
-  return parseInt(inputBits.slice(nRotation) + inputBits.slice(0, nRotation), 2)
-}
-
-const intToHexLittleEndianStr = (n, size = 4) => {
-  const nStr = n.toString(16).padStart(2 * size, '0')
-  let result = ''
-  for (let i = (size - 1) * 2; i >= 0; i = i - 2) {
-    result += nStr.slice(i, i + 2)
-  }
-  return result
+const leftBitsRotate = (inputNumber, nRotation) => {
+  return (inputNumber << nRotation) | (inputNumber >>> (32 - nRotation))
 }
 
 const s = [
@@ -43,33 +32,38 @@ const K = [
 ]
 
 export const md5 = (inputStr) => {
-  let inputHex = inputStr.split('')
-    .map(char => char.charCodeAt(0)
-      .toString(16)
-      .padStart(2, '0'))
-    .join('')
+  const length = Math.ceil((inputStr.length + 9) / 64) * 64
+  let input = new Uint8Array(length)
+  let i = 0
 
-  const length = inputHex.length * 4
-
-  inputHex += "80"
-  while (inputHex.length % 128 !== 112) {
-    inputHex += "00"
+  while(i < inputStr.length) {
+    input[i] = inputStr.charCodeAt(i)
+    i++
   }
 
-  const lengthHex = intToHexLittleEndianStr(length % (2 ** 64), 8)
-  inputHex += lengthHex
+  input[i] = 0x80
+  i++
 
-  let a0 = 0x67452301
-  let b0 = 0xefcdab89
-  let c0 = 0x98badcfe
-  let d0 = 0x10325476
+  while (i < length - 8) {
+    input[i] = 0x00
+    i++
+  }
 
-  for (let j = 0; j < inputHex.length; j += 128) {
-    const chunk = inputHex.slice(j, j + 128)
+  let bitsLength = (inputStr.length * 8) % 2 ** 64
+  for (let _ = 0; _ < 8; _++) {
+    input[i] = bitsLength & 0xFF
+    bitsLength = bitsLength >>> 8
+    i++
+  }
 
-    const M = []
-    for (let k = 0; k < 128; k += 8) {
-      M.push(parseInt(intToHexLittleEndianStr(parseInt(chunk.slice(k, k + 8), 16)), 16))
+  let a0 = 0x67452301, b0 = 0xefcdab89, c0 = 0x98badcfe, d0 = 0x10325476
+
+  for (let j = 0; j < input.length; j += 64) {
+    const chunk = input.slice(j, j + 64)
+
+    const M = new Uint32Array(16)
+    for (let k = 0; k < 64; k += 4) {
+      M[k / 4] = (chunk[k]) | (chunk[k + 1] << 8) | (chunk[k + 2] << 16) | (chunk[k + 3] << 24)
     }
 
     let A = a0, B = b0, C = c0, D = d0
@@ -77,16 +71,16 @@ export const md5 = (inputStr) => {
     for (let i = 0; i < 64; i++) {
       let F, g
       if (0 <= i && i < 16) {
-        F = (B & C) | ((~B >>> 0) & D)
+        F = (B & C) | (~B & D)
         g = i
       } else if (16 <= i && i < 32) {
-        F = (D & B) | ((~D >>> 0) & C)
+        F = (D & B) | (~D & C)
         g = (5 * i + 1) % 16
       } else if (32 <= i && i < 48) {
         F = B ^ C ^ D
         g = (3 * i + 5) % 16
       } else if (48 <= i && i < 64) {
-        F = C ^ (B | (~D >>> 0))
+        F = C ^ (B | ~D)
         g = (7 * i) % 16
       }
 
@@ -94,7 +88,7 @@ export const md5 = (inputStr) => {
       A = D
       D = C
       C = B
-      B = (B + leftBitsRotate(F, s[i], 32)) >>> 0
+      B = (B + leftBitsRotate(F, s[i])) >>> 0
     }
 
     a0 = (a0 + A) >>> 0
@@ -103,6 +97,20 @@ export const md5 = (inputStr) => {
     d0 = (d0 + D) >>> 0
   }
 
-  return intToHexLittleEndianStr(a0) + intToHexLittleEndianStr(b0)
-  + intToHexLittleEndianStr(c0) + intToHexLittleEndianStr(d0)
+  const result = []
+  for (let j = 0; j < 4; j++) {
+    result[j] = (a0 & 0xFF).toString(16).padStart(2, '0')
+    a0 >>>= 8
+
+    result[j + 4] = (b0 & 0xFF).toString(16).padStart(2, '0')
+    b0 >>>= 8
+
+    result[j + 8] = (c0 & 0xFF).toString(16).padStart(2, '0')
+    c0 >>>= 8
+
+    result[j + 12] = (d0 & 0xFF).toString(16).padStart(2, '0')
+    d0 >>>= 8
+  }
+
+  return result.join('')
 }
