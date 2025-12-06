@@ -1,0 +1,11 @@
+{
+  "type": "module",
+  "scripts": {
+    "lint": "eslint",
+    "format": "prettier --write --list-different '**/*.{js,json,ts}'"
+  },
+  "dependencies": {
+    "eslint": "^9.39.1",
+    "prettier": "^3.7.4"
+  }
+}
