@@ -3,7 +3,6 @@ import { readFile } from '../../utils/javascript/file-utils'
 const isExample = false
 const FILE_NAME = isExample ? 'input/example.txt' : 'input/input.txt'
 const SIZE = isExample ? 6 : 70
-const NB_BYTES = isExample ? 12 : 1024
 
 const bytes = readFile(FILE_NAME)
 

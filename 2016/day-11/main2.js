@@ -42,7 +42,7 @@ for (let i = 0; i < NUMBER_OF_FLOORS; i++) {
 }
 
 const NEW_ELEMENTS = ['elerium', 'dilithium']
-for (const _ of NEW_ELEMENTS) {
+for (let _ = 0; _ < NEW_ELEMENTS.length; _++) {
   const index = ELEMENTS.length
   ELEMENTS.push(ELEMENTS)
   GENERATORS[0] += 2 ** index

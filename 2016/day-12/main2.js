@@ -23,10 +23,11 @@ let i = 0
 while (i < PROGRAM_LENGTH && i >= 0) {
   const instruction = instructions[i]
   switch (instruction.action) {
-    case 'cpy':
+    case 'cpy': {
       let cpy = isNaN(instruction.params[0]) ? registers[instruction.params[0]] : instruction.params[0]
       registers[instruction.params[1]] = cpy
       break
+    }
 
     case 'inc':
       registers[instruction.params[0]]++
@@ -36,13 +37,14 @@ while (i < PROGRAM_LENGTH && i >= 0) {
       registers[instruction.params[0]]--
       break
 
-    case 'jnz':
+    case 'jnz': {
       let value = isNaN(instruction.params[0]) ? registers[instruction.params[0]] : instruction.params[0]
       if (value !== 0) {
         let jumpLength = isNaN(instruction.params[1]) ? registers[instruction.params[1]] : instruction.params[1]
         i += jumpLength - 1
       }
       break
+    }
   }
   i++
 }

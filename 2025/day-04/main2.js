@@ -38,7 +38,6 @@ const hasLessThanFourAdjacentRoll = (x, y) => {
 }
 
 let result = 0
-let n = 0
 let rollToRemove = []
 
 do {

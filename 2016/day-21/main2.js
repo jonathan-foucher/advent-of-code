@@ -43,13 +43,14 @@ for (let i = OPERATIONS.length - 1; i >= 0; i--) {
       password[op.params[1]] = temp
       break
 
-    case 'swap letter':
+    case 'swap letter': {
       const index1 = password.indexOf(op.params[0])
       const index2 = password.indexOf(op.params[1])
       temp = password[index1]
       password[index1] = password[index2]
       password[index2] = temp
       break
+    }
 
     case 'rotate left':
       shift = password.length - (op.params[0] % password.length)
@@ -61,7 +62,7 @@ for (let i = OPERATIONS.length - 1; i >= 0; i--) {
       password = [...password.slice(shift, password.length), ...password.slice(0, shift)]
       break
 
-    case 'rotate based on position':
+    case 'rotate based on position': {
       let index = password.indexOf(op.params[0])
 
       if (index % 2 === 1) {
@@ -75,6 +76,7 @@ for (let i = OPERATIONS.length - 1; i >= 0; i--) {
 
       password = [...password.slice(shift, password.length), ...password.slice(0, shift)]
       break
+    }
 
     case 'reverse':
       password = [

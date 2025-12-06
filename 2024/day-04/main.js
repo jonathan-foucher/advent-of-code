@@ -14,7 +14,7 @@ const colSize = matrix[0].length
 
 const vertStr = Array(colSize)
   .fill({})
-  .map((e) => [])
+  .map(() => [])
 matrix.forEach((row, i) => {
   row.forEach((col, j) => {
     vertStr[j][i] = col
@@ -28,7 +28,7 @@ const resultVert = vertStr
 
 const diagStr = Array(colSize * 2 - 1)
   .fill({})
-  .map((e) => [])
+  .map(() => [])
 matrix.forEach((row, i) => {
   row.forEach((col, j) => {
     diagStr[i + j].push(col)
@@ -42,7 +42,7 @@ const resultDiag = diagStr
 
 const diagReversedStr = Array(colSize * 2 - 1)
   .fill({})
-  .map((e) => [])
+  .map(() => [])
 matrix.reverse().forEach((row, i) => {
   row.forEach((col, j) => {
     diagReversedStr[i + j].push(col)

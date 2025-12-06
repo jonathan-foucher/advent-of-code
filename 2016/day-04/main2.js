@@ -3,8 +3,8 @@ import { readFile } from '../../utils/javascript/file-utils'
 const FILE_NAME = 'input/input.txt'
 
 const rooms = readFile(FILE_NAME).map((line) => {
-  const name = /^.+(?=\-\d+)/.exec(line)[0]
-  const sectorId = parseInt(/(?<=\-)\d+(?=\[)/.exec(line)[0])
+  const name = /^.+(?=-\d+)/.exec(line)[0]
+  const sectorId = parseInt(/(?<=-)\d+(?=\[)/.exec(line)[0])
   const checksum = /(?<=\[)[a-z]+(?=\]$)/.exec(line)[0]
   return { name, sectorId, checksum }
 })
