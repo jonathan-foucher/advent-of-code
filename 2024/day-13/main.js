@@ -10,7 +10,7 @@ const file = readFile(FILE_NAME)
 
 const games = []
 let currentGame = {}
-for (let i = 0; i < file.length; i++) {
+for (let i = 0; i < file.length + 1; i++) {
   const gameLine = i % 4
   let numbers = []
   switch (gameLine) {
