@@ -25,8 +25,13 @@ export const or = (n2, n1) => {
 }
 
 export const not = (n, nbBits = 0) => {
-  return parseInt(n.toString(2).padStart(nbBits, '0')
-    .split('')
-    .map(c => c === '1' ? 0 : 1)
-    .join(''), 2)
+  return parseInt(
+    n
+      .toString(2)
+      .padStart(nbBits, '0')
+      .split('')
+      .map((c) => (c === '1' ? 0 : 1))
+      .join(''),
+    2
+  )
 }

@@ -36,7 +36,7 @@ export const md5 = (inputStr) => {
   let input = new Uint8Array(length)
   let i = 0
 
-  while(i < inputStr.length) {
+  while (i < inputStr.length) {
     input[i] = inputStr.charCodeAt(i)
     i++
   }
@@ -51,22 +51,28 @@ export const md5 = (inputStr) => {
 
   let bitsLength = (inputStr.length * 8) % 2 ** 64
   for (let _ = 0; _ < 8; _++) {
-    input[i] = bitsLength & 0xFF
+    input[i] = bitsLength & 0xff
     bitsLength = bitsLength >>> 8
     i++
   }
 
-  let a0 = 0x67452301, b0 = 0xefcdab89, c0 = 0x98badcfe, d0 = 0x10325476
+  let a0 = 0x67452301,
+    b0 = 0xefcdab89,
+    c0 = 0x98badcfe,
+    d0 = 0x10325476
 
   for (let j = 0; j < input.length; j += 64) {
     const chunk = input.slice(j, j + 64)
 
     const M = new Uint32Array(16)
     for (let k = 0; k < 64; k += 4) {
-      M[k / 4] = (chunk[k]) | (chunk[k + 1] << 8) | (chunk[k + 2] << 16) | (chunk[k + 3] << 24)
+      M[k / 4] = chunk[k] | (chunk[k + 1] << 8) | (chunk[k + 2] << 16) | (chunk[k + 3] << 24)
     }
 
-    let A = a0, B = b0, C = c0, D = d0
+    let A = a0,
+      B = b0,
+      C = c0,
+      D = d0
 
     for (let i = 0; i < 64; i++) {
       let F, g
@@ -99,16 +105,16 @@ export const md5 = (inputStr) => {
 
   const result = []
   for (let j = 0; j < 4; j++) {
-    result[j] = (a0 & 0xFF).toString(16).padStart(2, '0')
+    result[j] = (a0 & 0xff).toString(16).padStart(2, '0')
     a0 >>>= 8
 
-    result[j + 4] = (b0 & 0xFF).toString(16).padStart(2, '0')
+    result[j + 4] = (b0 & 0xff).toString(16).padStart(2, '0')
     b0 >>>= 8
 
-    result[j + 8] = (c0 & 0xFF).toString(16).padStart(2, '0')
+    result[j + 8] = (c0 & 0xff).toString(16).padStart(2, '0')
     c0 >>>= 8
 
-    result[j + 12] = (d0 & 0xFF).toString(16).padStart(2, '0')
+    result[j + 12] = (d0 & 0xff).toString(16).padStart(2, '0')
     d0 >>>= 8
   }
 

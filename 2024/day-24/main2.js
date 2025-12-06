@@ -27,8 +27,8 @@ const checkBit = (counter, maxDepth, prevInputs) => {
     return
   }
 
-  const cStr = ("0" + counter).slice(-2)
-  const cPrevStr = ("0" + (counter - 1)).slice(-2)
+  const cStr = ('0' + counter).slice(-2)
+  const cPrevStr = ('0' + (counter - 1)).slice(-2)
 
   const prevCarry = outputs.get(prevInputs.join(' AND ')) || outputs.get(prevInputs.reverse().join(' AND '))
 
@@ -38,9 +38,7 @@ const checkBit = (counter, maxDepth, prevInputs) => {
 
   let add = outputs.get(`x${cStr} XOR y${cStr}`) || outputs.get(`y${cStr} XOR x${cStr}`)
 
-  let inputs = counter === 0 ? [ 'x00', 'y00' ]
-    : counter === 1 ? [ add, carry ]
-    : [ add, nextCarry ]
+  let inputs = counter === 0 ? ['x00', 'y00'] : counter === 1 ? [add, carry] : [add, nextCarry]
   const finalAdd = outputs.get(inputs.join(' XOR ')) || outputs.get(inputs.reverse().join(' XOR '))
 
   if (finalAdd && finalAdd !== `z${cStr}`) {
@@ -54,7 +52,10 @@ const checkBit = (counter, maxDepth, prevInputs) => {
   }
 
   if (counter !== maxDepth && !finalAdd && !ops.get(`z${cStr}`).split(' XOR ').includes(add)) {
-    const zInputs = ops.get(`z${cStr}`).split(' XOR ').filter(key => key !== nextCarry)[0]
+    const zInputs = ops
+      .get(`z${cStr}`)
+      .split(' XOR ')
+      .filter((key) => key !== nextCarry)[0]
     const opAdd = ops.get(add)
     const opZ = ops.get(zInputs)
     outputs.set(opZ, add)
@@ -63,7 +64,7 @@ const checkBit = (counter, maxDepth, prevInputs) => {
     swaps.push(add)
     swaps.push(zInputs)
     add = zInputs
-    inputs = [ add, nextCarry ]
+    inputs = [add, nextCarry]
   }
 
   checkBit(counter + 1, maxDepth, inputs)

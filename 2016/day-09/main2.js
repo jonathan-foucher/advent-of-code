@@ -19,9 +19,10 @@ const getStrValue = (str, mult) => {
     return marker.index * mult + getStrValue(str.slice(marker.index), mult)
   }
 
-  const [nChar, nTime] = marker[0].replaceAll(/\(|\)/g, '')
-      .split('x')
-      .map(n => parseInt(n))
+  const [nChar, nTime] = marker[0]
+    .replaceAll(/\(|\)/g, '')
+    .split('x')
+    .map((n) => parseInt(n))
 
   const markerLength = marker[0].length
 

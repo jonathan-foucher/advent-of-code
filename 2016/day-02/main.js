@@ -36,7 +36,7 @@ for (let i = 0; i < inputs.length; i++) {
       x++
     }
   }
-  result += NUM_PAD.find(key => key.x === x && key.y === y).value
+  result += NUM_PAD.find((key) => key.x === x && key.y === y).value
 }
 
 console.log(result)

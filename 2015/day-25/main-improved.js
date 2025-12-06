@@ -45,7 +45,7 @@ while (sum !== number) {
 
 newMult = mults[0]
 for (let j = 1; j < mults.length; j++) {
-  newMult = newMult * mults[j] % MOD_VALUE
+  newMult = (newMult * mults[j]) % MOD_VALUE
 }
 
 console.log((FIRST_CODE * newMult) % MOD_VALUE)

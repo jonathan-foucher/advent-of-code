@@ -9,7 +9,8 @@ const HASHING_TIMES = 2016
 const REGEX_THREE = /(.)\1\1/
 
 const hashes = []
-let counter = 0, i = -1
+let counter = 0,
+  i = -1
 
 while (counter < TARGET) {
   i++

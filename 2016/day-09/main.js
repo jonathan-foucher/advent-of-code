@@ -14,11 +14,12 @@ for (let i = 0; i < markers.length; i++) {
     continue
   }
 
-  const [nChar, nTime] = marker[0].replaceAll(/\(|\)/g, '')
+  const [nChar, nTime] = marker[0]
+    .replaceAll(/\(|\)/g, '')
     .split('x')
-    .map(n => parseInt(n))
+    .map((n) => parseInt(n))
   const markerLength = marker[0].length
-  result += (nChar * nTime) + marker.index - inputIndex
+  result += nChar * nTime + marker.index - inputIndex
   inputIndex = marker.index + markerLength + nChar
 }
 result += input.length - inputIndex

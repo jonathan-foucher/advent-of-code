@@ -9,7 +9,7 @@ for (let i = 0; i < lines.length - 2; i++) {
   const input = lines[i].split(' => ')[0]
   const output = lines[i].split(' => ')[1]
 
-  const remplacement = replacements.find(r => r.input === input)
+  const remplacement = replacements.find((r) => r.input === input)
   if (remplacement) {
     remplacement.outputs.push(output)
   } else {
@@ -17,7 +17,7 @@ for (let i = 0; i < lines.length - 2; i++) {
   }
 }
 
-const molecule = [...lines[lines.length - 1].matchAll(/[A-Z][a-z]*/g)].map(match => match[0])
+const molecule = [...lines[lines.length - 1].matchAll(/[A-Z][a-z]*/g)].map((match) => match[0])
 
 const keys = new Set()
 for (let i = 0; i < replacements.length; i++) {

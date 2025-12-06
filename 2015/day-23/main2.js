@@ -2,13 +2,12 @@ import { readFile } from '../../utils/javascript/file-utils'
 
 const FILE_NAME = 'input/input.txt'
 
-const instructions = readFile(FILE_NAME)
-  .map(line => {
-    const name = /^[a-z]{3}(?= )/.exec(line)[0]
-    const register = /(?<=^[a-z]{3} )[a-z]/.exec(line) ? /(?<=^[a-z]{3} )[a-z]/.exec(line)[0] : undefined
-    const offset = /(?<= )[+-]\d+/.exec(line) ? parseInt(/(?<= )[+-]\d+/.exec(line)[0]) : undefined
-    return { name, register, offset }
-  })
+const instructions = readFile(FILE_NAME).map((line) => {
+  const name = /^[a-z]{3}(?= )/.exec(line)[0]
+  const register = /(?<=^[a-z]{3} )[a-z]/.exec(line) ? /(?<=^[a-z]{3} )[a-z]/.exec(line)[0] : undefined
+  const offset = /(?<= )[+-]\d+/.exec(line) ? parseInt(/(?<= )[+-]\d+/.exec(line)[0]) : undefined
+  return { name, register, offset }
+})
 
 let i = 0
 const registers = { a: 1, b: 0 }

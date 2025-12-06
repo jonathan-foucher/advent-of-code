@@ -1,7 +1,7 @@
 import { readFile } from '../../utils/javascript/file-utils'
 
 const isExample = false
-const FILE_NAME = isExample ? 'input/example.txt' :'input/input.txt'
+const FILE_NAME = isExample ? 'input/example.txt' : 'input/input.txt'
 const SIZE = isExample ? 6 : 70
 const NB_BYTES = isExample ? 12 : 1024
 
@@ -16,7 +16,7 @@ for (let i = 0; i <= SIZE; i++) {
       y: i,
       x: j,
       key: `${i}-${j}`,
-      isEnd: j === SIZE && i === SIZE
+      isEnd: j === SIZE && i === SIZE,
     })
   }
 }
@@ -29,7 +29,8 @@ const updatePossibilities = (possibilities, bestCaseScores) => {
     if (possibility.isFinished) {
       newPossibilities.push(possibility)
     } else {
-      if (possibility.x > 0
+      if (
+        possibility.x > 0
         && !map[possibility.y][possibility.x - 1].isWall
         && !possibility.path.includes(map[possibility.y][possibility.x - 1].key)
       ) {
@@ -44,14 +45,15 @@ const updatePossibilities = (possibilities, bestCaseScores) => {
             y: newCase.y,
             score: newScore,
             path: [...possibility.path, newCase.key],
-            isFinished: newCase.isEnd
+            isFinished: newCase.isEnd,
           }
           newPossibilities.push(newPossibility)
           bestCaseScores.set(newCase.key, newScore)
         }
       }
 
-      if (possibility.y > 0
+      if (
+        possibility.y > 0
         && !map[possibility.y - 1][possibility.x].isWall
         && !possibility.path.includes(map[possibility.y - 1][possibility.x].key)
       ) {
@@ -66,14 +68,15 @@ const updatePossibilities = (possibilities, bestCaseScores) => {
             y: newCase.y,
             score: newScore,
             path: [...possibility.path, newCase.key],
-            isFinished: newCase.isEnd
+            isFinished: newCase.isEnd,
           }
           newPossibilities.push(newPossibility)
           bestCaseScores.set(newCase.key, newScore)
         }
       }
 
-      if (possibility.y < SIZE
+      if (
+        possibility.y < SIZE
         && !map[possibility.y + 1][possibility.x].isWall
         && !possibility.path.includes(map[possibility.y + 1][possibility.x].key)
       ) {
@@ -89,14 +92,15 @@ const updatePossibilities = (possibilities, bestCaseScores) => {
             y: newCase.y,
             score: newScore,
             path: [...possibility.path, newCase.key],
-            isFinished: newCase.isEnd
+            isFinished: newCase.isEnd,
           }
           newPossibilities.push(newPossibility)
           bestCaseScores.set(newCase.key, newScore)
         }
       }
 
-      if (possibility.x < SIZE
+      if (
+        possibility.x < SIZE
         && !map[possibility.y][possibility.x + 1].isWall
         && !possibility.path.includes(map[possibility.y][possibility.x + 1].key)
       ) {
@@ -111,7 +115,7 @@ const updatePossibilities = (possibilities, bestCaseScores) => {
             y: newCase.y,
             score: newScore,
             path: [...possibility.path, newCase.key],
-            isFinished: newCase.isEnd
+            isFinished: newCase.isEnd,
           }
           newPossibilities.push(newPossibility)
           bestCaseScores.set(newCase.key, newScore)
@@ -132,13 +136,15 @@ while (isPossible) {
   let xStart = 0
   let yStart = 0
 
-  let possibilities = [{
-    x: xStart,
-    y: yStart,
-    score: 0,
-    path: [ `${xStart}-${yStart}` ],
-    isFinished: false
-  }]
+  let possibilities = [
+    {
+      x: xStart,
+      y: yStart,
+      score: 0,
+      path: [`${xStart}-${yStart}`],
+      isFinished: false,
+    },
+  ]
   let isUpdated = false
   do {
     const { newPossibilities, isUpdatedResult } = updatePossibilities(possibilities, bestCaseScores)
@@ -149,7 +155,7 @@ while (isPossible) {
   if (possibilities.length > 0) {
     nBytes++
   } else {
-     isPossible = false
+    isPossible = false
   }
 }
 

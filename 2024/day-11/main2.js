@@ -22,7 +22,9 @@ const blink = (value, counter) => {
       const strLength = strValue.length
       if (strLength % 2 === 0) {
         const nDigits = strLength / 2
-        res = blink(parseInt(strValue.slice(0, nDigits)), counter + 1) + blink(parseInt(strValue.slice(nDigits)), counter + 1)
+        res =
+          blink(parseInt(strValue.slice(0, nDigits)), counter + 1)
+          + blink(parseInt(strValue.slice(nDigits)), counter + 1)
       } else {
         res = blink(value * 2024, counter + 1)
       }
@@ -32,7 +34,9 @@ const blink = (value, counter) => {
   }
 }
 
-let numbers = readFile(FILE_NAME)[0].split(' ').map(e => parseInt(e))
+let numbers = readFile(FILE_NAME)[0]
+  .split(' ')
+  .map((e) => parseInt(e))
 let result = 0
 
 for (let j = 0; j < numbers.length; j++) {

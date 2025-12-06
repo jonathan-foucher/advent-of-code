@@ -2,16 +2,15 @@ import { readFile } from '../../utils/javascript/file-utils'
 
 const FILE_NAME = 'input/input.txt'
 
-let ranges = readFile(FILE_NAME).map(line => {
-  if (line.includes('-')) {
-    return [
-      parseInt(line.split('-')[0]),
-      parseInt(line.split('-')[1])
-    ]
-  }
-  return null
-}).filter(range => range)
-.sort((a, b) => a[0] - b[0])
+let ranges = readFile(FILE_NAME)
+  .map((line) => {
+    if (line.includes('-')) {
+      return [parseInt(line.split('-')[0]), parseInt(line.split('-')[1])]
+    }
+    return null
+  })
+  .filter((range) => range)
+  .sort((a, b) => a[0] - b[0])
 
 let mergedRanges = []
 

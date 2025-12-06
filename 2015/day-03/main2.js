@@ -8,7 +8,7 @@ let x1 = 0
 let y1 = 0
 let x2 = 0
 let y2 = 0
-const visitedLocations = [ '0-0' ]
+const visitedLocations = ['0-0']
 
 for (let i = 0; i < directions.length; i++) {
   const direction = directions[i]

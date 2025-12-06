@@ -3,9 +3,9 @@ import { readFile } from '../../utils/javascript/file-utils'
 const FILE_NAME = 'input/input.txt'
 
 let ranges = readFile(FILE_NAME)
-  .map(line => line.split('-').map(n => parseInt(n)))
+  .map((line) => line.split('-').map((n) => parseInt(n)))
   .sort((a, b) => {
-    if (a[0] > b[0] || a[0] === b[0] && a[1] > b[1]) {
+    if (a[0] > b[0] || (a[0] === b[0] && a[1] > b[1])) {
       return 1
     }
     return -1

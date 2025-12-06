@@ -5,7 +5,7 @@ const FILE_NAME = 'input/input.txt'
 
 const PASSCODE = readFile(FILE_NAME)[0]
 const GRID_MAX = 3
-const OPEN_CHARS = [ 'b', 'c', 'd', 'e', 'f' ]
+const OPEN_CHARS = ['b', 'c', 'd', 'e', 'f']
 
 const getLongestPathLength = (path, x, y) => {
   if (x === GRID_MAX && y === GRID_MAX) {

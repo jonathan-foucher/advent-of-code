@@ -2,8 +2,10 @@ import { readFile } from '../../utils/javascript/file-utils'
 
 const FILE_NAME = 'input/input.txt'
 
-const dimensions = readFile(FILE_NAME).map(line =>
-  line.split('x').map(value => parseInt(value))
+const dimensions = readFile(FILE_NAME).map((line) =>
+  line
+    .split('x')
+    .map((value) => parseInt(value))
     .sort((a, b) => {
       return a - b
     })
@@ -15,7 +17,7 @@ for (let i = 0; i < dimensions.length; i++) {
   const dimension = dimensions[i]
   for (let j = 0; j < dimension.length - 1; j++) {
     for (let k = 1; k < dimension.length; k++)
-      if (k !== j ) {
+      if (k !== j) {
         result += 2 * dimension[j] * dimension[k]
       }
   }

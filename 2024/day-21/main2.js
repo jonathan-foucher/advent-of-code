@@ -17,7 +17,7 @@ const NUM_PAD = [
   { value: '2', x: 1, y: 2 },
   { value: '3', x: 2, y: 2 },
   { value: '0', x: 1, y: 3 },
-  { value: 'A', x: 2, y: 3 }
+  { value: 'A', x: 2, y: 3 },
 ]
 
 const DIR_PAD = [
@@ -25,7 +25,7 @@ const DIR_PAD = [
   { value: 'A', x: 2, y: 0 },
   { value: '<', x: 0, y: 1 },
   { value: 'v', x: 1, y: 1 },
-  { value: '>', x: 2, y: 1 }
+  { value: '>', x: 2, y: 1 },
 ]
 
 const cache = new Map()
@@ -39,17 +39,18 @@ const countSeq = (seq, depth, isNumPad) => {
   const currentPad = isNumPad ? NUM_PAD : DIR_PAD
 
   let counter = 0
-  let currentKey = currentPad.find(key => key.value === 'A')
+  let currentKey = currentPad.find((key) => key.value === 'A')
   for (let i = 0; i < seq.length; i++) {
     const char = seq[i]
-    const target = currentPad.find(key => key.value === char)
+    const target = currentPad.find((key) => key.value === char)
     let deltaX = target.x - currentKey.x
     let deltaY = target.y - currentKey.y
     let newSeq = ''
     while (deltaX !== 0 || deltaY !== 0) {
       if (deltaX < 0) {
-        const isLeftGap = currentPad.filter(key => key.x >= target.x && key.x < target.x - deltaX
-          && key.y === target.y - deltaY).length !== Math.abs(deltaX)
+        const isLeftGap =
+          currentPad.filter((key) => key.x >= target.x && key.x < target.x - deltaX && key.y === target.y - deltaY)
+            .length !== Math.abs(deltaX)
 
         if (!isLeftGap) {
           while (deltaX < 0) {
@@ -60,8 +61,9 @@ const countSeq = (seq, depth, isNumPad) => {
       }
 
       if (deltaY > 0) {
-        const isBotGap = currentPad.filter(key => key.x === target.x - deltaX
-          && key.y <= target.y && key.y > target.y - deltaY).length !== Math.abs(deltaY)
+        const isBotGap =
+          currentPad.filter((key) => key.x === target.x - deltaX && key.y <= target.y && key.y > target.y - deltaY)
+            .length !== Math.abs(deltaY)
 
         if (!isBotGap) {
           while (deltaY > 0) {
@@ -72,8 +74,9 @@ const countSeq = (seq, depth, isNumPad) => {
       }
 
       if (deltaY < 0) {
-        const isTopGap = currentPad.filter(key => key.x === target.x - deltaX
-          && key.y >= target.y && key.y < target.y - deltaY).length !== Math.abs(deltaY)
+        const isTopGap =
+          currentPad.filter((key) => key.x === target.x - deltaX && key.y >= target.y && key.y < target.y - deltaY)
+            .length !== Math.abs(deltaY)
 
         if (!isTopGap) {
           while (deltaY < 0) {
@@ -84,8 +87,9 @@ const countSeq = (seq, depth, isNumPad) => {
       }
 
       if (deltaX > 0) {
-        const isRightGap = currentPad.filter(key => key.x <= target.x && key.x > target.x - deltaX
-          && key.y === target.y - deltaY).length !== Math.abs(deltaX)
+        const isRightGap =
+          currentPad.filter((key) => key.x <= target.x && key.x > target.x - deltaX && key.y === target.y - deltaY)
+            .length !== Math.abs(deltaX)
 
         if (!isRightGap) {
           while (deltaX > 0) {

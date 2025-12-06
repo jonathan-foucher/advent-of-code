@@ -39,7 +39,7 @@ for (let i = 0; i <= lines.length; i++) {
   }
 
   if (isKey === null) {
-    isKey = line.split('').some(char => char !== '#')
+    isKey = line.split('').some((char) => char !== '#')
   }
 
   for (let j = 0; j < WIDTH; j++) {

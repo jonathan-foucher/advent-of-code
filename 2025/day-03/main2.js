@@ -24,7 +24,8 @@ const getMax = (bank, str, idx) => {
   return getMax(bank, str + max, idx + maxIdx + 1)
 }
 
-readFile(FILE_NAME).map(bank => bank.split('').map(char => parseInt(char)))
-  .forEach(bank => result += getMax(bank, '', 0))
+readFile(FILE_NAME)
+  .map((bank) => bank.split('').map((char) => parseInt(char)))
+  .forEach((bank) => (result += getMax(bank, '', 0)))
 
 console.log(result)

@@ -2,8 +2,9 @@ import { readFile } from '../../utils/javascript/file-utils'
 
 const FILE_NAME = 'input/input.txt'
 
-const instructions = readFile(FILE_NAME)[0].split(', ')
-  .map(item => {
+const instructions = readFile(FILE_NAME)[0]
+  .split(', ')
+  .map((item) => {
     const rotation = item[0]
     const steps = parseInt(item.slice(1, item.length))
     return { rotation, steps }
@@ -21,7 +22,7 @@ for (let i = 0; i < instructions.length; i++) {
     direction = (direction + 3) % 4
   }
 
-  switch(direction) {
+  switch (direction) {
     case 0:
       y -= steps
       break

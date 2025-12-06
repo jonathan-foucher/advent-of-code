@@ -4,8 +4,8 @@ const FILE_NAME = 'input/input.txt'
 
 const inputs = readFile(FILE_NAME)
 
-const voyels = [ 'a', 'e', 'i', 'o', 'u' ]
-const forbiddenStrings = [ 'ab', 'cd', 'pq', 'xy' ]
+const voyels = ['a', 'e', 'i', 'o', 'u']
+const forbiddenStrings = ['ab', 'cd', 'pq', 'xy']
 
 let result = 0
 
@@ -26,11 +26,12 @@ for (let i = 0; i < inputs.length; i++) {
     previousChar = char
   }
 
-  if (voyelsCount >= 3
+  if (
+    voyelsCount >= 3
     && hasDoubleChar
-    && forbiddenStrings.every(forbiddenString => !str.includes(forbiddenString))
+    && forbiddenStrings.every((forbiddenString) => !str.includes(forbiddenString))
   ) {
-      result++
+    result++
   }
 }
 

@@ -13,20 +13,20 @@ for (let i = 0; i < lines.length; i++) {
   if (line.length === 0) {
     isInstruction = true
   } else if (!isInstruction) {
-    map.push(line.split('')
-      .flatMap(e => {
+    map.push(
+      line.split('').flatMap((e) => {
         switch (e) {
           case '#':
             return '##'.split('')
           case 'O':
             return '[]'.split('')
           case '.':
-           return '..'.split('')
+            return '..'.split('')
           case '@':
             return '@.'.split('')
         }
-    }))
-
+      })
+    )
   } else {
     instructions.push(line.split(''))
   }
@@ -42,23 +42,23 @@ for (let i = 0; i < map.length; i++) {
   }
 }
 
-instructions = instructions.flatMap(e => e)
+instructions = instructions.flatMap((e) => e)
 
 for (let i = 0; i < instructions.length; i++) {
   let delta
   switch (instructions[i]) {
     case '>':
       delta = [1, 0]
-      break;
+      break
     case '<':
       delta = [-1, 0]
-      break;
+      break
     case '^':
       delta = [0, -1]
-      break;
+      break
     case 'v':
       delta = [0, 1]
-      break;
+      break
   }
 
   const isVerticalDelta = delta[1] !== 0
@@ -91,12 +91,13 @@ for (let i = 0; i < instructions.length; i++) {
     let nextBoxes = [nextCase, nextOtherCase]
 
     while (nextBoxes.length > 0 && !isBlocked) {
-      nextBoxes = nextBoxes.flatMap(nextBox => {
+      nextBoxes = nextBoxes.flatMap((nextBox) => {
         let nextCase = map[nextBox.y + delta[1]][nextBox.x + delta[0]]
         if (nextCase.value === '#') {
           isBlocked = true
         } else if (nextCase.value !== '.') {
-          const nextOtherCase = nextCase.value === '[' ? map[nextCase.y][nextCase.x + 1] : map[nextCase.y][nextCase.x - 1]
+          const nextOtherCase =
+            nextCase.value === '[' ? map[nextCase.y][nextCase.x + 1] : map[nextCase.y][nextCase.x - 1]
           const res = []
           if (!alreadyAddedBoxes.includes(nextCase.key)) {
             alreadyAddedBoxes.push(nextCase.key)
@@ -134,7 +135,7 @@ let result = 0
 for (let i = 0; i < map.length; i++) {
   for (let j = 0; j < map[0].length; j++) {
     if (map[i][j].value === '[') {
-      result+= map[i][j].x + map[i][j].y * 100
+      result += map[i][j].x + map[i][j].y * 100
     }
   }
 }

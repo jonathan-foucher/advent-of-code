@@ -18,11 +18,15 @@ const runPossibilities = (containers, filledContainerIds, remainingLiters) => {
     return
   }
 
-  containers.filter(container => container.value <= remainingLiters
-    && (filledContainerIds.length === 0 || container.id > filledContainerIds[filledContainerIds.length - 1]))
-    .map(container =>
+  containers
+    .filter(
+      (container) =>
+        container.value <= remainingLiters
+        && (filledContainerIds.length === 0 || container.id > filledContainerIds[filledContainerIds.length - 1])
+    )
+    .map((container) =>
       runPossibilities(
-        containers.filter(c => c.id !== container.id),
+        containers.filter((c) => c.id !== container.id),
         [...filledContainerIds, container.id],
         remainingLiters - container.value
       )

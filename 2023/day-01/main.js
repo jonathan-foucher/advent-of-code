@@ -12,10 +12,10 @@ const numbers = [
   { str: 'nine', n: 9 },
 ]
 
-const reversedNumbers = numbers.map(number => {
+const reversedNumbers = numbers.map((number) => {
   return {
     str: number.str.split('').reverse().join(''),
-    n: number.n
+    n: number.n,
   }
 })
 
@@ -25,26 +25,26 @@ const getFirstDigit = (str, isReversed = false) => {
   const nArray = isReversed ? reversedNumbers : numbers
   do {
     const numbersToReplace = []
-    nArray.filter(number => res.includes(number.str))
-      .forEach(number => {
+    nArray
+      .filter((number) => res.includes(number.str))
+      .forEach((number) => {
         numbersToReplace[res.indexOf(number.str)] = number
       })
 
-    numbersToReplace.forEach(number => {
+    numbersToReplace.forEach((number) => {
       res = res.replace(number.str, number.n)
     })
 
     updated = numbersToReplace.length > 0
   } while (updated)
 
-  return res.split('')
-    .find((char) => !isNaN(char))
+  return res.split('').find((char) => !isNaN(char))
 }
 
 const result = readFile('input/input.txt')
-  .map(line => getFirstDigit(line) + getFirstDigit(line, true))
-  .filter(line => line)
-  .map(line => parseInt(line))
+  .map((line) => getFirstDigit(line) + getFirstDigit(line, true))
+  .filter((line) => line)
+  .map((line) => parseInt(line))
   .reduce((acc, val) => acc + val, 0)
 
 console.log(result)

@@ -29,7 +29,7 @@ for (let i = 0; i < inputs.length; i++) {
       }
 
       const bab = aba[1] + aba[0] + aba[1]
-      if (inBrackets.every(s => !s.includes(bab))) {
+      if (inBrackets.every((s) => !s.includes(bab))) {
         continue
       }
       hasMatch = true

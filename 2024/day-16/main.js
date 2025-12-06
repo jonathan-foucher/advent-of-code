@@ -2,7 +2,7 @@ import { readFile } from '../../utils/javascript/file-utils'
 
 const FILE_NAME = 'input/input.txt'
 
-const matrix = readFile(FILE_NAME).map(line => line.split(''))
+const matrix = readFile(FILE_NAME).map((line) => line.split(''))
 let xStart
 let yStart
 const map = []
@@ -17,13 +17,13 @@ for (let i = 0; i < matrix.length; i++) {
     }
 
     map[i].push({
-        value: char,
-        isWall: char === '#',
-        isEnd: char === 'E',
-        y: i,
-        x: j,
-        key: `${j}-${i}`
-      })
+      value: char,
+      isWall: char === '#',
+      isEnd: char === 'E',
+      y: i,
+      x: j,
+      key: `${j}-${i}`,
+    })
   }
 }
 
@@ -40,7 +40,8 @@ const updatePossibilities = (possibilities) => {
     if (possibility.isFinished) {
       newPossibilities.push(possibility)
     } else {
-      if (possibility.x > 0
+      if (
+        possibility.x > 0
         && !map[possibility.y][possibility.x - 1].isWall
         && !possibility.path.includes(map[possibility.y][possibility.x - 1].key)
       ) {
@@ -56,14 +57,15 @@ const updatePossibilities = (possibilities) => {
             score: newScore,
             direction: '<',
             path: [...possibility.path, newCase.key],
-            isFinished: newCase.isEnd
+            isFinished: newCase.isEnd,
           }
           newPossibilities.push(newPossibility)
           bestCaseScores.set(newCase.key, newScore)
         }
       }
 
-      if (possibility.y > 0
+      if (
+        possibility.y > 0
         && !map[possibility.y - 1][possibility.x].isWall
         && !possibility.path.includes(map[possibility.y - 1][possibility.x].key)
       ) {
@@ -79,14 +81,15 @@ const updatePossibilities = (possibilities) => {
             score: newScore,
             direction: '^',
             path: [...possibility.path, newCase.key],
-            isFinished: newCase.isEnd
+            isFinished: newCase.isEnd,
           }
           newPossibilities.push(newPossibility)
           bestCaseScores.set(newCase.key, newScore)
         }
       }
 
-      if (possibility.y < WIDTH - 1
+      if (
+        possibility.y < WIDTH - 1
         && !map[possibility.y + 1][possibility.x].isWall
         && !possibility.path.includes(map[possibility.y + 1][possibility.x].key)
       ) {
@@ -102,14 +105,15 @@ const updatePossibilities = (possibilities) => {
             score: newScore,
             direction: 'v',
             path: [...possibility.path, newCase.key],
-            isFinished: newCase.isEnd
+            isFinished: newCase.isEnd,
           }
           newPossibilities.push(newPossibility)
           bestCaseScores.set(newCase.key, newScore)
         }
       }
 
-      if (possibility.x < HEIGHT - 1
+      if (
+        possibility.x < HEIGHT - 1
         && !map[possibility.y][possibility.x + 1].isWall
         && !possibility.path.includes(map[possibility.y][possibility.x + 1].key)
       ) {
@@ -125,7 +129,7 @@ const updatePossibilities = (possibilities) => {
             score: newScore,
             direction: '>',
             path: [...possibility.path, newCase.key],
-            isFinished: newCase.isEnd
+            isFinished: newCase.isEnd,
           }
           newPossibilities.push(newPossibility)
           bestCaseScores.set(newCase.key, newScore)
@@ -136,14 +140,16 @@ const updatePossibilities = (possibilities) => {
   return { newPossibilities, isUpdatedResult }
 }
 
-let possibilities = [{
-  x: xStart,
-  y: yStart,
-  score: 0,
-  direction: '>',
-  path: [ `${xStart}-${yStart}` ],
-  isFinished: false
-}]
+let possibilities = [
+  {
+    x: xStart,
+    y: yStart,
+    score: 0,
+    direction: '>',
+    path: [`${xStart}-${yStart}`],
+    isFinished: false,
+  },
+]
 let isUpdated = false
 do {
   const { newPossibilities, isUpdatedResult } = updatePossibilities(possibilities)
@@ -152,8 +158,7 @@ do {
 } while (isUpdated)
 
 const result = Math.min(
-  ...possibilities.filter(possibility => possibility.isFinished)
-    .map(possibility => possibility.score)
+  ...possibilities.filter((possibility) => possibility.isFinished).map((possibility) => possibility.score)
 )
 
 console.log(result)

@@ -26,20 +26,20 @@ let result = ''
 for (let i = 0; i < inputs.length; i++) {
   for (let j = 0; j < inputs[i].length; j++) {
     const input = inputs[i][j]
-    if (input === 'U' && NUM_PAD.find(key => key.x === x && key.y === y - 1)) {
+    if (input === 'U' && NUM_PAD.find((key) => key.x === x && key.y === y - 1)) {
       y--
     }
-    if (input === 'L' && NUM_PAD.find(key => key.x === x - 1 && key.y === y)) {
+    if (input === 'L' && NUM_PAD.find((key) => key.x === x - 1 && key.y === y)) {
       x--
     }
-    if (input === 'D' && NUM_PAD.find(key => key.x === x && key.y === y + 1)) {
+    if (input === 'D' && NUM_PAD.find((key) => key.x === x && key.y === y + 1)) {
       y++
     }
-    if (input === 'R' && NUM_PAD.find(key => key.x === x + 1 && key.y === y)) {
+    if (input === 'R' && NUM_PAD.find((key) => key.x === x + 1 && key.y === y)) {
       x++
     }
   }
-  result += NUM_PAD.find(key => key.x === x && key.y === y).value
+  result += NUM_PAD.find((key) => key.x === x && key.y === y).value
 }
 
 console.log(result)

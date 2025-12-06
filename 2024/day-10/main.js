@@ -24,33 +24,38 @@ const getNextPositions = (mat, row, col) => {
 
 let row = -1
 const matrix = readFile(FILE_NAME)
-  .map(line =>  line.split(''))
-  .map(line => {
+  .map((line) => line.split(''))
+  .map((line) => {
     row++
     let col = -1
-    return line.map(char => {
+    return line.map((char) => {
       col++
       return { value: parseInt(char), col, row }
     })
   })
 
-const result = matrix.flatMap(e => e).filter(e => e.value === 0)
-  .map(startingPosition => {
-    let res = [ startingPosition ]
+const result = matrix
+  .flatMap((e) => e)
+  .filter((e) => e.value === 0)
+  .map((startingPosition) => {
+    let res = [startingPosition]
 
     let currentStep = 1
     do {
-      res = res.flatMap(pos => getNextPositions(matrix, pos.row, pos.col))
-        .filter(nextPos => nextPos.value === currentStep)
+      res = res
+        .flatMap((pos) => getNextPositions(matrix, pos.row, pos.col))
+        .filter((nextPos) => nextPos.value === currentStep)
       currentStep++
     } while (res.length > 0 && currentStep <= 9)
 
     const differentRes = []
-    res.map(e => `${e.row}-${e.col}`).forEach(key => {
-      if (!differentRes.includes(key)) {
-        differentRes.push(key)
-      }
-    })
+    res
+      .map((e) => `${e.row}-${e.col}`)
+      .forEach((key) => {
+        if (!differentRes.includes(key)) {
+          differentRes.push(key)
+        }
+      })
 
     return differentRes.length
   })

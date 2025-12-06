@@ -17,7 +17,10 @@ for (let y = 0; y < HEIGHT; y++) {
 for (let i = 0; i < inputs.length; i++) {
   const input = inputs[i]
   if (input.startsWith('rect')) {
-    const [A, B] = input.split(' ')[1].split('x').map(n => parseInt(n))
+    const [A, B] = input
+      .split(' ')[1]
+      .split('x')
+      .map((n) => parseInt(n))
     for (let x = 0; x < A; x++) {
       for (let y = 0; y < B; y++) {
         pixels[y][x] = true
@@ -57,6 +60,6 @@ for (let y = 0; y < HEIGHT; y++) {
 }
 
 for (let y = 0; y < HEIGHT; y++) {
-  console.log(pixels[y].map(b => b ? '#' : ' ').join(''))
+  console.log(pixels[y].map((b) => (b ? '#' : ' ')).join(''))
 }
 console.log(result)

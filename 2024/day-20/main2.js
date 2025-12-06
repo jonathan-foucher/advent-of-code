@@ -5,7 +5,7 @@ const FILE_NAME = IS_EXAMPLE ? 'input/example.txt' : 'input/input.txt'
 const PICOSECONDS_THRESHOLD = IS_EXAMPLE ? 50 : 100
 const CHEAT_TIME = 20
 
-const matrix = readFile(FILE_NAME).map(line => line.split(''))
+const matrix = readFile(FILE_NAME).map((line) => line.split(''))
 let xStart
 let yStart
 let xEnd
@@ -26,12 +26,12 @@ for (let i = 0; i < matrix.length; i++) {
     }
 
     map[i].push({
-        value: char,
-        isWall: char === '#',
-        y: i,
-        x: j,
-        key: `${j}-${i}`
-      })
+      value: char,
+      isWall: char === '#',
+      y: i,
+      x: j,
+      key: `${j}-${i}`,
+    })
   }
 }
 
@@ -68,7 +68,7 @@ const calculateCasesScores = (x, y, score, path) => {
 
 calculateCasesScores(xStart, yStart, 0, [])
 
-let result = 0;
+let result = 0
 
 for (let i = 0; i < HEIGHT; i++) {
   for (let j = 0; j < WIDTH; j++) {
@@ -83,7 +83,7 @@ for (let i = 0; i < HEIGHT; i++) {
               const currentScore = caseScores.get(currentCase.key)
               const otherScore = caseScores.get(otherCase.key)
               if (otherScore - currentScore - delta >= PICOSECONDS_THRESHOLD) {
-                result++;
+                result++
               }
             }
           }

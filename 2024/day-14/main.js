@@ -8,13 +8,12 @@ const MAX_WIDTH = isExample ? 11 : 101
 const MAX_HEIGHT = isExample ? 7 : 103
 const NUMBER_OF_SECONDS = 100
 
-const robots = readFile(FILE_NAME)
-  .map(line => {
-    const info = line.split(' ')
-    const p = info[0].split('=')[1].split(',')
-    const v = info[1].split('=')[1].split(',')
-    return { px: parseInt(p[0]), py: parseInt(p[1]), vx: parseInt(v[0]), vy: parseInt(v[1]) }
-  })
+const robots = readFile(FILE_NAME).map((line) => {
+  const info = line.split(' ')
+  const p = info[0].split('=')[1].split(',')
+  const v = info[1].split('=')[1].split(',')
+  return { px: parseInt(p[0]), py: parseInt(p[1]), vx: parseInt(v[0]), vy: parseInt(v[1]) }
+})
 
 const quadrants = [0, 0, 0, 0]
 

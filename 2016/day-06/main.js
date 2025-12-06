@@ -6,7 +6,7 @@ const inputs = readFile(FILE_NAME)
 const RESULT_SIZE = inputs[0].length
 
 const occurences = []
-for (let i = 0; i < RESULT_SIZE; i ++) {
+for (let i = 0; i < RESULT_SIZE; i++) {
   occurences.push([])
 }
 
@@ -14,7 +14,7 @@ for (let i = 0; i < inputs.length; i++) {
   const input = inputs[i]
   for (let j = 0; j < RESULT_SIZE; j++) {
     const char = input[j]
-    const charCount = occurences[j].find(c => c.value === char)
+    const charCount = occurences[j].find((c) => c.value === char)
     if (charCount) {
       charCount.count++
       continue
@@ -23,15 +23,18 @@ for (let i = 0; i < inputs.length; i++) {
   }
 }
 
-const result = occurences.map(occurence => {
-  return occurence.reduce((acc, val) => {
-    if (val.count > acc.count) {
-      return val
-    }
-    return acc
-  }, { count: 0 })
-  .value
-})
-.join('')
+const result = occurences
+  .map((occurence) => {
+    return occurence.reduce(
+      (acc, val) => {
+        if (val.count > acc.count) {
+          return val
+        }
+        return acc
+      },
+      { count: 0 }
+    ).value
+  })
+  .join('')
 
 console.log(result)

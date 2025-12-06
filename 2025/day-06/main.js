@@ -2,7 +2,7 @@ import { readFile } from '../../utils/javascript/file-utils'
 
 const FILE_NAME = 'input/input.txt'
 
-const lines = readFile(FILE_NAME).map(line => line.split(' ').filter(a => a))
+const lines = readFile(FILE_NAME).map((line) => line.split(' ').filter((a) => a))
 
 let result = 0
 

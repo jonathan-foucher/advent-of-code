@@ -5,7 +5,7 @@ const FILE_NAME = 'input/input.txt'
 
 const PASSCODE = readFile(FILE_NAME)[0]
 const GRID_MAX = 3
-const OPEN_CHARS = [ 'b', 'c', 'd', 'e', 'f' ]
+const OPEN_CHARS = ['b', 'c', 'd', 'e', 'f']
 
 let best = Infinity
 const getShortestPath = (path, x, y) => {
@@ -37,7 +37,7 @@ const getShortestPath = (path, x, y) => {
     results.push(getShortestPath(path + 'R', x + 1, y))
   }
 
-  results = results.filter(e => e)
+  results = results.filter((e) => e)
   if (results.length === 0) {
     return
   }

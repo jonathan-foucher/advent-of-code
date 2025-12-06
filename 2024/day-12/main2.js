@@ -36,18 +36,25 @@ const getNumberOfCorners = (mat, plant) => {
   const botLeft = (mat[row + 1] && mat[row + 1][col - 1]?.value) === plant.value
   const botRight = (mat[row + 1] && mat[row + 1][col + 1]?.value) === plant.value
 
-  return (!top && !left) + (!top && !right) + (!bot && !right) + (!bot && !left)
-    + (top && left && !topLeft) + (top && right && !topRight)
-    + (bot && right && !botRight) + (bot && left && !botLeft)
+  return (
+    (!top && !left)
+    + (!top && !right)
+    + (!bot && !right)
+    + (!bot && !left)
+    + (top && left && !topLeft)
+    + (top && right && !topRight)
+    + (bot && right && !botRight)
+    + (bot && left && !botLeft)
+  )
 }
 
 let row = -1
 const matrix = readFile(FILE_NAME)
-  .map(line =>  line.split(''))
-  .map(line => {
+  .map((line) => line.split(''))
+  .map((line) => {
     row++
     let col = -1
-    return line.map(char => {
+    return line.map((char) => {
       col++
       return { value: char, col, row, key: `${row}-${col}` }
     })
@@ -66,18 +73,20 @@ for (let i = 0; i < height; i++) {
       let nextPlants = [plant]
       do {
         area.push(...nextPlants)
-        alreadyCountedPlants.push(...nextPlants.map(nextPlant => nextPlant.key))
-        nextPlants = nextPlants.flatMap(
-          nextPlant => getNextPlants(matrix, nextPlant.row, nextPlant.col)
-            .filter(nextPlant => plant.value === nextPlant.value
-              && !alreadyCountedPlants.includes(nextPlant.key)))
-            .reduce((acc, val) => {
-              if (!acc.map(p => p.key).includes(val.key)) {
-                acc.push(val)
-              }
-              return acc
-            }, [])
-      } while(nextPlants.length > 0)
+        alreadyCountedPlants.push(...nextPlants.map((nextPlant) => nextPlant.key))
+        nextPlants = nextPlants
+          .flatMap((nextPlant) =>
+            getNextPlants(matrix, nextPlant.row, nextPlant.col).filter(
+              (nextPlant) => plant.value === nextPlant.value && !alreadyCountedPlants.includes(nextPlant.key)
+            )
+          )
+          .reduce((acc, val) => {
+            if (!acc.map((p) => p.key).includes(val.key)) {
+              acc.push(val)
+            }
+            return acc
+          }, [])
+      } while (nextPlants.length > 0)
       areas.push(area)
     }
   }
@@ -87,7 +96,7 @@ let result = 0
 for (let i = 0; i < areas.length; i++) {
   const area = areas[i]
   let corners = 0
-  for (let j = 0; j < area.length; j++)  {
+  for (let j = 0; j < area.length; j++) {
     corners += getNumberOfCorners(matrix, area[j])
   }
   result += corners * area.length

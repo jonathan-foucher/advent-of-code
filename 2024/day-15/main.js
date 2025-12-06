@@ -29,28 +29,28 @@ for (let i = 0; i < map.length; i++) {
   }
 }
 
-instructions = instructions.flatMap(e => e)
+instructions = instructions.flatMap((e) => e)
 
 for (let i = 0; i < instructions.length; i++) {
   let delta
   switch (instructions[i]) {
     case '>':
-      delta = [ 1, 0 ]
-      break;
+      delta = [1, 0]
+      break
     case '<':
-      delta = [ -1, 0 ]
-      break;
+      delta = [-1, 0]
+      break
     case '^':
-      delta = [ 0, -1 ]
-      break;
+      delta = [0, -1]
+      break
     case 'v':
-      delta = [ 0, 1 ]
-      break;
+      delta = [0, 1]
+      break
   }
 
   let nextCase = map[robot.y + delta[1]][robot.x + delta[0]]
   const boxes = []
-  while(nextCase.value === 'O') {
+  while (nextCase.value === 'O') {
     boxes.push(nextCase)
     nextCase = map[nextCase.y + delta[1]][nextCase.x + delta[0]]
   }
@@ -73,7 +73,7 @@ let result = 0
 for (let i = 0; i < map.length; i++) {
   for (let j = 0; j < map[0].length; j++) {
     if (map[i][j].value === 'O') {
-      result+= map[i][j].x + map[i][j].y * 100
+      result += map[i][j].x + map[i][j].y * 100
     }
   }
 }

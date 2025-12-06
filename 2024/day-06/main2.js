@@ -17,21 +17,27 @@ let width = lines[0].length
 
 let row = 0
 let id = -1
-const matrix = lines
-  .map(line => {
-    let col = -1
-    const res = line.split('').map(value => {
-      col++
-      id++
-      if (value === '^') {
-        guardInitRow = row
-        guardInitCol = col
-      }
-      return { value: value === '^' ? '.' : value, row, col, isObstacle: value === '#', id, isGuardInitPos: value === '^' }
-    })
-    row++
-    return res
+const matrix = lines.map((line) => {
+  let col = -1
+  const res = line.split('').map((value) => {
+    col++
+    id++
+    if (value === '^') {
+      guardInitRow = row
+      guardInitCol = col
+    }
+    return {
+      value: value === '^' ? '.' : value,
+      row,
+      col,
+      isObstacle: value === '#',
+      id,
+      isGuardInitPos: value === '^',
+    }
   })
+  row++
+  return res
+})
 
 let dir = 0
 const nextDir = () => {
@@ -85,11 +91,8 @@ const isNextPositionObstacle = () => {
   return matrix[nextRow] && matrix[nextRow][nextCol] && matrix[nextRow][nextCol].isObstacle
 }
 
-const isGuardInitialState = () => guardInitRow === guardRow
-  && guardInitCol === guardCol
-  && dir === -1
-  && isNextPositionObstacle()
-
+const isGuardInitialState = () =>
+  guardInitRow === guardRow && guardInitCol === guardCol && dir === -1 && isNextPositionObstacle()
 
 let result = 0
 for (let i = 0; i < height; i++) {

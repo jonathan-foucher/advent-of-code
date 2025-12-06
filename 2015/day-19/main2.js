@@ -4,7 +4,7 @@ const FILE_NAME = 'input/input.txt'
 
 const lines = readFile(FILE_NAME)
 
-const molecule = [...lines[lines.length - 1].matchAll(/[A-Z][a-z]*/g)].map(match => match[0]).join('')
+const molecule = [...lines[lines.length - 1].matchAll(/[A-Z][a-z]*/g)].map((match) => match[0]).join('')
 
 const TARGET = 'e'
 
@@ -22,12 +22,12 @@ const getLowestReplacements = (molecule, n) => {
 
   for (let i = 0; i < REPLACEMENTS.length; i++) {
     const replacement = REPLACEMENTS[i]
-    const matches = [...molecule.matchAll(replacement.output)].filter(match => match) || []
+    const matches = [...molecule.matchAll(replacement.output)].filter((match) => match) || []
     for (let j = 0; j < matches.length; j++) {
       const match = matches[j]
-      const newStr = match.input.slice(0, match.index)
-        + match.input.slice(match.index, match.input.length)
-          .replace(replacement.output, replacement.input)
+      const newStr =
+        match.input.slice(0, match.index)
+        + match.input.slice(match.index, match.input.length).replace(replacement.output, replacement.input)
       const result = getLowestReplacements(newStr, n + 1)
       if (result > 0) {
         return result

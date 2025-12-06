@@ -21,13 +21,13 @@ for (let i = 0; i < lines.length; i++) {
       input2: line.split(' -> ')[0].split(' ')[2],
       output: line.split(' -> ')[1],
       operation: line.split(' -> ')[0].split(' ')[1],
-      result: null
+      result: null,
     })
   }
 }
 
-while (gates.some(gate => gate.result === null)) {
-  const gatesToCalculate = gates.filter(gate => gate.result === null)
+while (gates.some((gate) => gate.result === null)) {
+  const gatesToCalculate = gates.filter((gate) => gate.result === null)
 
   for (let i = 0; i < gatesToCalculate.length; i++) {
     const gate = gatesToCalculate[i]
@@ -40,13 +40,13 @@ while (gates.some(gate => gate.result === null)) {
       switch (gate.operation) {
         case 'AND':
           result = value1 & value2
-          break;
+          break
         case 'OR':
           result = value1 | value2
-          break;
+          break
         case 'XOR':
           result = value1 ^ value2
-          break;
+          break
       }
 
       gate.result = result
@@ -55,18 +55,21 @@ while (gates.some(gate => gate.result === null)) {
   }
 }
 
-const result = parseInt(Array.from(wires.entries())
-  .filter(wire => Z_REGEX.test(wire[0]))
-  .sort((a, b) => {
-    const aValue = parseInt(a[0].split('z')[1])
-    const bValue = parseInt(b[0].split('z')[1])
-    if (aValue > bValue) {
+const result = parseInt(
+  Array.from(wires.entries())
+    .filter((wire) => Z_REGEX.test(wire[0]))
+    .sort((a, b) => {
+      const aValue = parseInt(a[0].split('z')[1])
+      const bValue = parseInt(b[0].split('z')[1])
+      if (aValue > bValue) {
         return -1
       } else {
         return 1
-    }
-  })
-  .map(wire => wire[1])
-  .join(''), 2)
+      }
+    })
+    .map((wire) => wire[1])
+    .join(''),
+  2
+)
 
 console.log(result)

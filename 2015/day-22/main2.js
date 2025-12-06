@@ -3,9 +3,9 @@ import { readFile } from '../../utils/javascript/file-utils'
 const FILE_NAME = 'input/input.txt'
 
 let BOSS_STATS = {}
-readFile(FILE_NAME).forEach(line => {
-const hp = /(?<=Hit Points: )\d+/.exec(line)
-const damage = /(?<=Damage: )\d+/.exec(line)
+readFile(FILE_NAME).forEach((line) => {
+  const hp = /(?<=Hit Points: )\d+/.exec(line)
+  const damage = /(?<=Damage: )\d+/.exec(line)
   if (hp) {
     BOSS_STATS.hp = parseInt(hp)
   }
@@ -29,7 +29,7 @@ const getMinMana = (bossHp, hp, mana, shieldTimer, poisonTimer, rechargeTimer, m
   }
 
   if (shieldTimer > 0) {
-    hp += (BOSS_STATS.damage > 7 ? 7 : BOSS_STATS.damage - 1)
+    hp += BOSS_STATS.damage > 7 ? 7 : BOSS_STATS.damage - 1
     shieldTimer--
   }
   if (poisonTimer > 0) {
@@ -90,7 +90,7 @@ const getMinMana = (bossHp, hp, mana, shieldTimer, poisonTimer, rechargeTimer, m
     results.push(getMinMana(bossHp, hp, mana - 229, shieldTimer, poisonTimer, 5, manaCost + 229))
   }
 
-  results = results.filter(e => e)
+  results = results.filter((e) => e)
   return results.length > 0 ? Math.min(...results) : undefined
 }
 

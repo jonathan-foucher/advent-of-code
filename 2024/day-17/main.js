@@ -14,7 +14,10 @@ for (let i = 0; i < lines.length; i++) {
     registers.push(parseInt(line.split(': ')[1]))
   }
   if (line.includes('Program')) {
-    program = line.split(': ')[1].split(',').map(number => parseInt(number))
+    program = line
+      .split(': ')[1]
+      .split(',')
+      .map((number) => parseInt(number))
   }
 }
 
@@ -28,42 +31,42 @@ while (pointer >= 0 && pointer < program.length) {
   switch (operand) {
     case 4:
       comboOperand = registers[0]
-      break;
+      break
     case 5:
       comboOperand = registers[1]
-      break;
+      break
     case 6:
       comboOperand = registers[2]
-      break;
+      break
   }
 
   switch (opcode) {
     case 0:
       registers[0] = Math.trunc(registers[0] / Math.pow(2, comboOperand))
-      break;
+      break
     case 1:
       registers[1] = xor(registers[1], operand)
-      break;
+      break
     case 2:
       registers[1] = comboOperand % 8
-      break;
+      break
     case 3:
       if (registers[0] !== 0) {
         pointer = operand - 2
       }
-      break;
+      break
     case 4:
       registers[1] = xor(registers[1], registers[2])
-      break;
+      break
     case 5:
       result.push(comboOperand % 8)
-      break;
+      break
     case 6:
       registers[1] = Math.trunc(registers[0] / Math.pow(2, comboOperand))
-      break;
+      break
     case 7:
       registers[2] = Math.trunc(registers[0] / Math.pow(2, comboOperand))
-      break;
+      break
   }
   pointer += 2
 }

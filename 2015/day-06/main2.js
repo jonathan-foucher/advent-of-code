@@ -19,18 +19,19 @@ for (let i = 0; i < instructions.length; i++) {
   const instruction = instructions[i]
   const isToggle = instruction.startsWith('toggle')
   const state = instruction.startsWith('turn on')
-  const coordinates = instruction.replace('turn on ', '')
+  const coordinates = instruction
+    .replace('turn on ', '')
     .replace('turn off ', '')
     .replace('toggle ', '')
     .split(' through ')
-    .map(coordinate => coordinate.split(',').map(value => parseInt(value)))
+    .map((coordinate) => coordinate.split(',').map((value) => parseInt(value)))
 
-  const xCoordinates = [ coordinates[0][0], coordinates[1][0] ]
-  const yCoordinates = [ coordinates[0][1], coordinates[1][1] ]
+  const xCoordinates = [coordinates[0][0], coordinates[1][0]]
+  const yCoordinates = [coordinates[0][1], coordinates[1][1]]
 
   for (let x = Math.min(...xCoordinates); x <= Math.max(...xCoordinates); x++) {
     for (let y = Math.min(...yCoordinates); y <= Math.max(...yCoordinates); y++) {
-      lights[x][y] += isToggle ? 2 : (state ? 1 : -1)
+      lights[x][y] += isToggle ? 2 : state ? 1 : -1
       if (lights[x][y] < 0) {
         lights[x][y] = 0
       }

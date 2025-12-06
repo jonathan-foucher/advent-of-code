@@ -4,7 +4,7 @@ const FILE_NAME = 'input/input.txt'
 
 let result = 0
 
-const ranges = readFile(FILE_NAME).flatMap(line => line.split(','))
+const ranges = readFile(FILE_NAME).flatMap((line) => line.split(','))
 
 for (let i = 0; i < ranges.length; i++) {
   const firstNumber = parseInt(ranges[i].split('-')[0])

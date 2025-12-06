@@ -6,7 +6,7 @@ const lines = readFile(FILE_NAME)
 
 const patterns = lines[0].split(', ')
 const onsens = []
-for (let i = 2; i < lines.length; i ++) {
+for (let i = 2; i < lines.length; i++) {
   onsens.push(lines[i])
 }
 
@@ -17,7 +17,7 @@ const checkPossibility = (str, possiblePatterns, onsen) => {
   if (!onsen.startsWith(str)) {
     return false
   }
-  return possiblePatterns.some(pattern => checkPossibility(str + pattern, possiblePatterns, onsen))
+  return possiblePatterns.some((pattern) => checkPossibility(str + pattern, possiblePatterns, onsen))
 }
 
 let result = 0
@@ -26,12 +26,12 @@ for (let i = 0; i < onsens.length; i++) {
   const possiblePatterns = []
   for (let j = 0; j < patterns.length; j++) {
     const pattern = patterns[j]
-    if(onsen.includes(pattern)) {
+    if (onsen.includes(pattern)) {
       possiblePatterns.push(pattern)
     }
   }
 
-  result += possiblePatterns.some(pattern => checkPossibility(pattern, possiblePatterns, onsen)) ? 1 : 0
+  result += possiblePatterns.some((pattern) => checkPossibility(pattern, possiblePatterns, onsen)) ? 1 : 0
 }
 
 console.log(result)

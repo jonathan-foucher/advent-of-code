@@ -24,20 +24,20 @@ const getNextPlants = (mat, row, col) => {
 
 let row = -1
 const matrix = readFile(FILE_NAME)
-  .map(line =>  line.split(''))
-  .map(line => {
+  .map((line) => line.split(''))
+  .map((line) => {
     row++
     let col = -1
-    return line.map(char => {
+    return line.map((char) => {
       col++
       return { value: char, col, row, key: `${row}-${col}` }
     })
   })
 
-matrix.forEach(line => {
-  line.forEach(plant => {
-    plant.fences = 4 - getNextPlants(matrix, plant.row, plant.col)
-      .filter(nextPlant => plant.value === nextPlant.value).length
+matrix.forEach((line) => {
+  line.forEach((plant) => {
+    plant.fences =
+      4 - getNextPlants(matrix, plant.row, plant.col).filter((nextPlant) => plant.value === nextPlant.value).length
   })
 })
 
@@ -54,18 +54,20 @@ for (let i = 0; i < height; i++) {
       let nextPlants = [plant]
       do {
         area.push(...nextPlants)
-        alreadyCountedPlants.push(...nextPlants.map(nextPlant => nextPlant.key))
-        nextPlants = nextPlants.flatMap(
-          nextPlant => getNextPlants(matrix, nextPlant.row, nextPlant.col)
-            .filter(nextPlant => plant.value === nextPlant.value
-              && !alreadyCountedPlants.includes(nextPlant.key)))
-            .reduce((acc, val) => {
-              if (!acc.map(p => p.key).includes(val.key)) {
-                acc.push(val)
-              }
-              return acc
-            }, [])
-      } while(nextPlants.length > 0)
+        alreadyCountedPlants.push(...nextPlants.map((nextPlant) => nextPlant.key))
+        nextPlants = nextPlants
+          .flatMap((nextPlant) =>
+            getNextPlants(matrix, nextPlant.row, nextPlant.col).filter(
+              (nextPlant) => plant.value === nextPlant.value && !alreadyCountedPlants.includes(nextPlant.key)
+            )
+          )
+          .reduce((acc, val) => {
+            if (!acc.map((p) => p.key).includes(val.key)) {
+              acc.push(val)
+            }
+            return acc
+          }, [])
+      } while (nextPlants.length > 0)
       areas.push(area)
     }
   }
@@ -75,7 +77,7 @@ let result = 0
 for (let i = 0; i < areas.length; i++) {
   const area = areas[i]
   let perimeter = 0
-  for (let j = 0; j < area.length; j++)  {
+  for (let j = 0; j < area.length; j++) {
     perimeter += area[j].fences
   }
   result += area.length * perimeter

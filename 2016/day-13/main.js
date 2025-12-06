@@ -3,14 +3,17 @@ import { readFile } from '../../utils/javascript/file-utils'
 const FILE_NAME = 'input/input.txt'
 
 const FAV_NUMBER = parseInt(readFile(FILE_NAME)[0])
-const TARGET_X = 31, TARGET_Y = 39
-const LIMIT_X = TARGET_X * 2, LIMIT_Y = TARGET_Y * 2
+const TARGET_X = 31,
+  TARGET_Y = 39
+const LIMIT_X = TARGET_X * 2,
+  LIMIT_Y = TARGET_Y * 2
 const MAP_WALLS = []
 for (let y = 0; y <= LIMIT_Y; y++) {
   MAP_WALLS.push([])
   for (let x = 0; x <= LIMIT_X; x++) {
     const value = x * x + 3 * x + 2 * x * y + y + y * y + FAV_NUMBER
-    let i = 0, counter = 0
+    let i = 0,
+      counter = 0
     while (value >>> i > 0) {
       if ((value >>> i) % 2 === 1) {
         counter++
@@ -52,7 +55,7 @@ const getLowestSteps = (x, y, steps, alreadyVisited) => {
     results.push(getLowestSteps(x, y + 1, steps + 1, [...alreadyVisited]))
   }
 
-  results = results.filter(e => e)
+  results = results.filter((e) => e)
   return Math.min(...results)
 }
 

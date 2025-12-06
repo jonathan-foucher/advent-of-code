@@ -14,18 +14,16 @@ while (result.length < PASSWORD_LENGTH) {
   const hash = md5(input + i)
   if (hash.match(REGEX_START_FIVE_0)) {
     const position = parseInt(hash[5])
-    if (!isNaN(position)
-      && position < PASSWORD_LENGTH
-      && !result.find(char => char.position === position)
-    ) {
+    if (!isNaN(position) && position < PASSWORD_LENGTH && !result.find((char) => char.position === position)) {
       result.push({ position, value: hash[6] })
     }
   }
   i++
 }
 
-result = result.sort((a, b) => a.position - b.position)
-  .map(char => char.value)
+result = result
+  .sort((a, b) => a.position - b.position)
+  .map((char) => char.value)
   .join('')
 
 console.log(result)

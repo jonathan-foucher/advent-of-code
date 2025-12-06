@@ -8,7 +8,7 @@ const cache = new Map()
 
 const patterns = lines[0].split(', ')
 const onsens = []
-for (let i = 2; i < lines.length; i ++) {
+for (let i = 2; i < lines.length; i++) {
   onsens.push(lines[i])
 }
 

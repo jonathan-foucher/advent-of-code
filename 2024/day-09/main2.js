@@ -3,7 +3,8 @@ import { readFile } from '../../utils/javascript/file-utils'
 const FILE_NAME = 'input/input.txt'
 
 const temp = []
-readFile(FILE_NAME)[0].split('')
+readFile(FILE_NAME)[0]
+  .split('')
   .map((e, i) => {
     for (let j = 0; j < parseInt(e); j++) {
       if (i % 2 === 0) {
@@ -21,16 +22,16 @@ for (let i = temp.length - 1; i > 0; i--) {
     const id = temp[i]
 
     let fileSize = 1
-    while(temp[i - 1] === id) {
+    while (temp[i - 1] === id) {
       fileSize++
       i--
     }
 
-    let f = temp.findIndex(e => e === '.')
+    let f = temp.findIndex((e) => e === '.')
     let freeSpaceSize = 0
     do {
       freeSpaceSize++
-    } while(temp[f + freeSpaceSize] === '.')
+    } while (temp[f + freeSpaceSize] === '.')
 
     let end = false
     do {
@@ -42,15 +43,15 @@ for (let i = temp.length - 1; i > 0; i--) {
         }
         end = true
       } else {
-        f +=  freeSpaceSize
+        f += freeSpaceSize
         do {
           f++
-        } while(f < i && temp[f] !== '.')
+        } while (f < i && temp[f] !== '.')
         if (temp[f] === '.') {
           freeSpaceSize = 0
           do {
             freeSpaceSize++
-          } while(temp[f + freeSpaceSize] === '.')
+          } while (temp[f + freeSpaceSize] === '.')
         } else {
           freeSpaceSize = 0
         }

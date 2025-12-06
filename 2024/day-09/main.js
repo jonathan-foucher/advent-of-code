@@ -3,7 +3,8 @@ import { readFile } from '../../utils/javascript/file-utils'
 const FILE_NAME = 'input/input.txt'
 
 const temp = []
-readFile(FILE_NAME)[0].split('')
+readFile(FILE_NAME)[0]
+  .split('')
   .map((e, i) => {
     for (let j = 0; j < parseInt(e); j++) {
       if (i % 2 === 0) {

@@ -2,7 +2,7 @@ import { readFile } from '../../utils/javascript/file-utils'
 
 const FILE_NAME = 'input/input.txt'
 
-const GRID = readFile(FILE_NAME).map(line => line.split(''))
+const GRID = readFile(FILE_NAME).map((line) => line.split(''))
 
 const HEIGHT = GRID.length
 const WIDTH = GRID[0].length

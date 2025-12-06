@@ -1,6 +1,6 @@
 import { readFile } from '../../utils/javascript/file-utils'
 
-const FILE_NAME ='input/input.txt'
+const FILE_NAME = 'input/input.txt'
 
 const lines = readFile(FILE_NAME)
 
@@ -14,14 +14,14 @@ for (let i = 0; i < lines.length; i++) {
   if (firstComputer) {
     firstComputer.push(secondComputerId)
   } else {
-    connectionsMap.set(firstComputerId, [ secondComputerId ])
+    connectionsMap.set(firstComputerId, [secondComputerId])
   }
 
   const secondComputer = connectionsMap.get(secondComputerId)
   if (secondComputer) {
     secondComputer.push(firstComputerId)
   } else {
-    connectionsMap.set(secondComputerId, [ firstComputerId ])
+    connectionsMap.set(secondComputerId, [firstComputerId])
   }
 }
 
@@ -40,13 +40,11 @@ for (let i = 0; i < computersConnections.length; i++) {
         const thirdId = connection[1][k]
         if (firstId[0] === 't' || secondId[0] === 't' || thirdId[0] === 't') {
           const key = [firstId, secondId, thirdId].sort().join('-')
-          if (!threeConnections.includes(key)
-            && connectionsMap.get(secondId).includes(thirdId)
-          ) {
-              threeConnections.push(key)
-              result++
-            }
+          if (!threeConnections.includes(key) && connectionsMap.get(secondId).includes(thirdId)) {
+            threeConnections.push(key)
+            result++
           }
+        }
       }
     }
   }

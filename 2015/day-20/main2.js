@@ -6,7 +6,7 @@ const TARGET = parseInt(readFile(FILE_NAME)[0])
 
 let max = 0
 let n = 0
-while(max < TARGET) {
+while (max < TARGET) {
   n++
   let res = 10
   for (let i = 2; i <= n; i++) {

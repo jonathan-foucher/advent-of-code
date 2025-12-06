@@ -2,8 +2,9 @@ import { readFile } from '../../utils/javascript/file-utils'
 
 const FILE_NAME = 'input/input.txt'
 
-const data = readFile(FILE_NAME)[0].split('')
-  .map(char => parseInt(char))
+const data = readFile(FILE_NAME)[0]
+  .split('')
+  .map((char) => parseInt(char))
 const DISK_LENGTH = 35651584
 
 let length = data.length

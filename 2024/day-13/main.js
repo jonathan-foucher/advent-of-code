@@ -11,33 +11,33 @@ const file = readFile(FILE_NAME)
 const games = []
 let currentGame = {}
 for (let i = 0; i < file.length; i++) {
-  const gameLine = i%4
+  const gameLine = i % 4
   let numbers = []
   switch (gameLine) {
     case 0:
       numbers = file[i].match(NUMBER_REGEX)
       currentGame.ax = parseInt(numbers[0])
       currentGame.ay = parseInt(numbers[1])
-      break;
+      break
     case 1:
       numbers = file[i].match(NUMBER_REGEX)
       currentGame.bx = parseInt(numbers[0])
       currentGame.by = parseInt(numbers[1])
-      break;
+      break
     case 2:
       numbers = file[i].match(NUMBER_REGEX)
       currentGame.px = parseInt(numbers[0])
       currentGame.py = parseInt(numbers[1])
-      break;
+      break
     case 3:
-    games.push(currentGame)
-    currentGame = {}
-      break;
+      games.push(currentGame)
+      currentGame = {}
+      break
   }
 }
 
 let result = 0
-games.forEach(game => {
+games.forEach((game) => {
   const detAB = game.ax * game.by - game.ay * game.bx
   const detAP = game.ax * game.py - game.ay * game.px
   const detBP = game.px * game.by - game.py * game.bx

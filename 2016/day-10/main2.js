@@ -5,7 +5,7 @@ const FILE_NAME = 'input/input.txt'
 const values = []
 const bots = []
 
-readFile(FILE_NAME).forEach(line => {
+readFile(FILE_NAME).forEach((line) => {
   let match = line.match(/value (\d+) goes to bot (\d+)/)
   if (match) {
     const botId = parseInt(match[2])
@@ -24,18 +24,18 @@ readFile(FILE_NAME).forEach(line => {
 
 for (let i = 0; i < values.length; i++) {
   const value = values[i]
-  const bot = bots.find(b => b.id === value.botId)
+  const bot = bots.find((b) => b.id === value.botId)
   bot.values.push(value.value)
 }
 
 let outputs = []
-while (bots.some(bot => bot.values.length === 2)) {
+while (bots.some((bot) => bot.values.length === 2)) {
   for (let i = 0; i < bots.length; i++) {
     const bot = bots[i]
     if (bot.values.length === 2) {
       const values = bot.values.sort((a, b) => a - b)
-      const lowBot = !bot.isLowOutput && bots.find(b => b.id === bot.low)
-      const highBot = !bot.isHighOutput && bots.find(b => b.id === bot.high)
+      const lowBot = !bot.isLowOutput && bots.find((b) => b.id === bot.low)
+      const highBot = !bot.isHighOutput && bots.find((b) => b.id === bot.high)
 
       if (lowBot) {
         lowBot.values.push(values[0])
@@ -54,8 +54,9 @@ while (bots.some(bot => bot.values.length === 2)) {
   }
 }
 
-const result = outputs.filter(output => output.id <= 2)
-  .map(output => output.value)
+const result = outputs
+  .filter((output) => output.id <= 2)
+  .map((output) => output.value)
   .reduce((acc, val) => acc * val, 1)
 
 console.log(result)

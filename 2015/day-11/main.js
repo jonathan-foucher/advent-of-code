@@ -41,7 +41,8 @@ while (true) {
 
   let threeIncreasing = false
   for (let i = 0; i < result.length - 2; i++) {
-    if (result.charCodeAt(i) + 1 === result.charCodeAt(i + 1)
+    if (
+      result.charCodeAt(i) + 1 === result.charCodeAt(i + 1)
       && result.charCodeAt(i) + 2 === result.charCodeAt(i + 2)
     ) {
       threeIncreasing = true

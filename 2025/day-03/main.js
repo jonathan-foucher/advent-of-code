@@ -4,7 +4,7 @@ const FILE_NAME = 'input/input.txt'
 
 let result = 0
 
-readFile(FILE_NAME).forEach(bank => {
+readFile(FILE_NAME).forEach((bank) => {
   const size = bank.length
   let max = 0
 
