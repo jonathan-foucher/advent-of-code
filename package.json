@@ -2,10 +2,19 @@
   "type": "module",
   "scripts": {
     "lint": "eslint",
-    "format": "prettier --write --list-different '**/*.{js,json,ts}'"
+    "prepare": "husky",
+    "format": "prettier --write --list-different '**/*.{js,json,ts}'",
+    "lint-staged": "lint-staged"
   },
-  "dependencies": {
+  "lint-staged": {
+    "*.{js,vue,ts}": [
+      "prettier --write --list-different '**/*.{js,json,ts}'"
+    ]
+  },
+  "devDependencies": {
     "eslint": "^9.39.1",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.7",
     "prettier": "^3.7.4"
   }
 }

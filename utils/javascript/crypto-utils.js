@@ -2,6 +2,7 @@ const leftBitsRotate = (inputNumber, nRotation) => {
   return (inputNumber << nRotation) | (inputNumber >>> (32 - nRotation))
 }
 
+// prettier-ignore
 const s = [
   7, 12, 17, 22, 7, 12, 17, 22, 7, 12, 17, 22, 7, 12, 17, 22,
   5, 9, 14, 20, 5, 9, 14, 20, 5, 9, 14, 20, 5, 9, 14, 20,
@@ -9,6 +10,7 @@ const s = [
   6, 10, 15, 21, 6, 10, 15, 21, 6, 10, 15, 21, 6, 10, 15, 21
 ]
 
+// prettier-ignore
 const K = [
   0xd76aa478, 0xe8c7b756, 0x242070db, 0xc1bdceee,
   0xf57c0faf, 0x4787c62a, 0xa8304613, 0xfd469501,
