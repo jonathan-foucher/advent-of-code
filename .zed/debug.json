@@ -1,0 +1,16 @@
+// Project-local debug tasks
+//
+// For more documentation on how to configure debug tasks,
+// see: https://zed.dev/docs/debugger
+[
+  {
+    "adapter": "JavaScript",
+    "label": "Debug current JS file",
+    "type": "node",
+    "request": "launch",
+    "program": "$ZED_FILE",
+    "cwd": "$ZED_DIRNAME",
+    "skipFiles": ["<node_internals>/**"],
+    "outFiles": ["${ZED_WORKTREE_ROOT}/utils/**/*.js", "${ZED_DIRNAME}/input/*.txt"]
+  }
+]
