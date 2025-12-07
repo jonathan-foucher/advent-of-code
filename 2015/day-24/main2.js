@@ -2,7 +2,7 @@ import { readFile } from '../../utils/file-utils.js'
 
 const FILE_NAME = 'input/input.txt'
 
-const NUMBER_OF_GROUPS = 3
+const NUMBER_OF_GROUPS = 4
 
 const PACKAGES = readFile(FILE_NAME)
   .map((n) => parseInt(n))

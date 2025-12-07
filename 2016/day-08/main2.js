@@ -50,13 +50,6 @@ for (let i = 0; i < inputs.length; i++) {
   }
 }
 
-let result = 0
 for (let y = 0; y < HEIGHT; y++) {
-  for (let x = 0; x < WIDTH; x++) {
-    if (pixels[y][x]) {
-      result++
-    }
-  }
+  console.log(pixels[y].map((b) => (b ? '#' : ' ')).join(''))
 }
-
-console.log(result)

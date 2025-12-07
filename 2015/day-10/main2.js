@@ -2,7 +2,7 @@ import { readFile } from '../../utils/file-utils.js'
 
 const FILE_NAME = 'input/input.txt'
 
-const NB_TURNS = 40
+const NB_TURNS = 50
 
 let str = readFile(FILE_NAME)[0]
 
