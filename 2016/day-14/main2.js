@@ -1,5 +1,5 @@
-import { readFile } from '../../utils/javascript/file-utils'
-import { md5 } from '../../utils/javascript/crypto-utils'
+import { readFile } from '../../utils/file-utils.js'
+import { md5 } from '../../utils/crypto-utils.js'
 
 const FILE_NAME = 'input/input.txt'
 const salt = readFile(FILE_NAME)[0]

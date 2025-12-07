@@ -1,4 +1,4 @@
-import { readFile } from '../../utils/javascript/file-utils'
+import { readFile } from '../../utils/file-utils.js'
 
 const SHOP_FILE_NAME = 'input/shop.txt'
 const FILE_NAME = 'input/input.txt'

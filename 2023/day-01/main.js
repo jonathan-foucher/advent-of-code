@@ -1,4 +1,4 @@
-import { readFile } from '../../utils/javascript/file-utils'
+import { readFile } from '../../utils/file-utils.js'
 
 const numbers = [
   { str: 'one', n: 1 },

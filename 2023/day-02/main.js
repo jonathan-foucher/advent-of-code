@@ -1,4 +1,4 @@
-import { readFile } from '../../utils/javascript/file-utils'
+import { readFile } from '../../utils/file-utils.js'
 
 const FILE_NAME = 'input/input.txt'
 const MAX_RED = 12

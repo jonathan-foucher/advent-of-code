@@ -1,5 +1,5 @@
-import { readFile } from '../../utils/javascript/file-utils'
-import { xor } from '../../utils/javascript/math-utils'
+import { readFile } from '../../utils/file-utils.js'
+import { xor } from '../../utils/math-utils.js'
 
 const FILE_NAME = 'input/input.txt'
 
