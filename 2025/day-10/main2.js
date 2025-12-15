@@ -1,5 +1,5 @@
 import { readFile } from '../../utils/file-utils.js'
-import { OPERATORS, branchSimplexMin } from '../../utils/solver-utils.js'
+import { OPERATORS, branchSimplexMin } from '../../utils/solver-simplex-utils.js'
 
 const FILE_NAME = 'input/input.txt'
 
