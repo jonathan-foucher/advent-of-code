@@ -161,8 +161,8 @@ const simplexMin = (constraints) => {
     }
   }
 
-  const solutions = []
-  const unorderedSolutions = tableau.slice(0, -1).map((r) => r[width])
+  const solution = []
+  const unorderedSolution = tableau.slice(0, -1).map((r) => r[width])
   for (let x = 0; x < width; x++) {
     let rowIdx = -1
     for (let y = 0; y < height; y++) {
@@ -171,13 +171,13 @@ const simplexMin = (constraints) => {
         break
       }
     }
-    solutions.push(rowIdx !== -1 ? unorderedSolutions[rowIdx] : 0)
+    solution.push(rowIdx !== -1 ? unorderedSolution[rowIdx] : 0)
   }
 
-  if (solutions.slice(nVariables + nSlacks).some((s) => Math.abs(s) > TOLERANCE)) {
+  if (solution.slice(nVariables + nSlacks).some((s) => Math.abs(s) > TOLERANCE)) {
     return null
   }
-  return solutions.slice(0, nVariables)
+  return solution.slice(0, nVariables)
 }
 
 const addConstraint = (constraints, idx, value, operator) => {
@@ -228,12 +228,12 @@ const addConstraint = (constraints, idx, value, operator) => {
   return newConstraints
 }
 
-const isValidSolution = (solutions, constraints) => {
+const isValidSolution = (solution, constraints) => {
   for (let i = 0; i < constraints.length; i++) {
     const constraint = constraints[i]
     let sum = 0
     for (let j = 0; j < constraint.variables.length; j++) {
-      sum += constraint.variables[j] * Math.round(solutions[j])
+      sum += constraint.variables[j] * Math.round(solution[j])
     }
 
     if (constraint.operator === OPERATORS.EQUAL) {
@@ -253,54 +253,58 @@ const isValidSolution = (solutions, constraints) => {
   return true
 }
 
-export const branchSimplexMin = (constraints, bestResult = Infinity, originalConstraints = null) => {
+export const branchSimplexMin = (
+  constraints,
+  best = { result: Infinity, solution: null },
+  originalConstraints = null
+) => {
   if (originalConstraints === null) {
     originalConstraints = constraints
   }
 
-  const solutions = simplexMin(constraints)
-  if (!solutions) {
-    return bestResult
+  const solution = simplexMin(constraints)
+  if (!solution) {
+    return best
   }
 
-  const result = solutions.reduce((sum, val) => sum + val, 0)
+  const result = solution.reduce((sum, val) => sum + val, 0)
 
   let idx = -1
   let value = 0
   let maxDelta = 0
-  for (let i = 0; i < solutions.length; i++) {
-    const delta = Math.abs(solutions[i] - Math.round(solutions[i]))
+  for (let i = 0; i < solution.length; i++) {
+    const delta = Math.abs(solution[i] - Math.round(solution[i]))
     if (delta > TOLERANCE && delta > maxDelta) {
       idx = i
-      value = solutions[i]
+      value = solution[i]
       maxDelta = delta
     }
   }
 
   if (idx === -1) {
-    const roundedSolutions = solutions.map((s) => Math.round(s))
-    const roundedResult = roundedSolutions.reduce((sum, val) => sum + val, 0)
-    if (isValidSolution(solutions, originalConstraints) && roundedResult < bestResult) {
-      return roundedResult
+    const roundedSolution = solution.map((s) => Math.round(s))
+    const roundedResult = roundedSolution.reduce((sum, val) => sum + val, 0)
+    if (isValidSolution(solution, originalConstraints) && roundedResult < best.result) {
+      return { result: roundedResult, solution: roundedSolution }
     }
-    return bestResult
+    return best
   }
 
-  if (result >= bestResult) {
-    return bestResult
+  if (result >= best.result) {
+    return best
   }
 
   const leftConstraints = addConstraint(constraints, idx, Math.floor(value), OPERATORS.LESS_THAN_EQUAL)
-  const leftResult = branchSimplexMin(leftConstraints, bestResult, originalConstraints)
-  if (leftResult < bestResult) {
-    bestResult = leftResult
+  const leftResult = branchSimplexMin(leftConstraints, best, originalConstraints)
+  if (leftResult.result < best.result) {
+    best = leftResult
   }
 
   const rightConstraints = addConstraint(constraints, idx, Math.ceil(value), OPERATORS.GREATER_THAN_EQUAL)
-  const rightResult = branchSimplexMin(rightConstraints, bestResult, originalConstraints)
-  if (rightResult < bestResult) {
-    bestResult = rightResult
+  const rightResult = branchSimplexMin(rightConstraints, best, originalConstraints)
+  if (rightResult.result < best.result) {
+    best = rightResult
   }
 
-  return bestResult
+  return best
 }

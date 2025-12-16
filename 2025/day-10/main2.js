@@ -33,7 +33,7 @@ let result = 0
 for (const line of readFile(FILE_NAME)) {
   const { buttons, joltages } = extractData(line)
   const constraints = initConstraints(buttons, joltages)
-  result += branchSimplexMin(constraints)
+  result += branchSimplexMin(constraints).result
 }
 
 console.log(result)
