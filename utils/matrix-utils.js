@@ -32,3 +32,57 @@ export const getDeterminant = (matrix) => {
   }
   return determinant
 }
+
+export const print = (matrix) => {
+  for (const row of matrix) {
+    console.log(row.join(''))
+  }
+}
+
+export const flipHorizontal = (matrix) => {
+  const flippedMatrix = []
+  for (let y = 0; y < matrix.length; y++) {
+    flippedMatrix.push([])
+    for (let x = matrix[0].length - 1; x >= 0; x--) {
+      flippedMatrix[y].push(matrix[y][x])
+    }
+  }
+
+  return flippedMatrix
+}
+
+export const flipVertical = (matrix) => {
+  const flippedMatrix = []
+  for (let y = matrix.length - 1; y >= 0; y--) {
+    flippedMatrix.push([])
+    for (let x = 0; x < matrix[0].length; x++) {
+      flippedMatrix[matrix.length - 1 - y].push(matrix[y][x])
+    }
+  }
+
+  return flippedMatrix
+}
+
+export const rotateRight = (matrix) => {
+  const rotatedMatrix = []
+  for (let y = 0; y < matrix[0].length; y++) {
+    rotatedMatrix.push([])
+    for (let x = matrix.length - 1; x >= 0; x--) {
+      rotatedMatrix[y].push(matrix[x][y])
+    }
+  }
+
+  return rotatedMatrix
+}
+
+export const rotateLeft = (matrix) => {
+  const rotatedMatrix = []
+  for (let y = matrix[0].length - 1; y >= 0; y--) {
+    rotatedMatrix.push([])
+    for (let x = 0; x < matrix.length; x++) {
+      rotatedMatrix[matrix[0].length - 1 - y].push(matrix[x][y])
+    }
+  }
+
+  return rotatedMatrix
+}
