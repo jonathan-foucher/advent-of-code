@@ -28,8 +28,8 @@ while (true) {
     after,
     instruction: {
       opcode: instruction[0],
-      intputA: instruction[1],
-      intputB: instruction[2],
+      inputA: instruction[1],
+      inputB: instruction[2],
       output: instruction[3],
     },
   })
@@ -41,8 +41,8 @@ for (let j = i + 2; j < lines.length; j++) {
   const instruction = lines[j].split(' ').map((char) => parseInt(char))
   program.push({
     opcode: instruction[0],
-    intputA: instruction[1],
-    intputB: instruction[2],
+    inputA: instruction[1],
+    inputB: instruction[2],
     output: instruction[3],
   })
 }
@@ -151,8 +151,8 @@ for (const capture of captures) {
     const registers = [...capture.before]
     registers[capture.instruction.output] = instruction.exec(
       registers,
-      capture.instruction.intputA,
-      capture.instruction.intputB
+      capture.instruction.inputA,
+      capture.instruction.inputB
     )
 
     for (let i = 0; i < 4; i++) {
@@ -184,7 +184,7 @@ while (instructions.some((instruction) => instruction.opcode === null)) {
 const registers = [0, 0, 0, 0]
 for (const line of program) {
   const instruction = instructions.find((instruction) => instruction.opcode === line.opcode)
-  registers[line.output] = instruction.exec(registers, line.intputA, line.intputB)
+  registers[line.output] = instruction.exec(registers, line.inputA, line.inputB)
 }
 
 const result = registers[0]

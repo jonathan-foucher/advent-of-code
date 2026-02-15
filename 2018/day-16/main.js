@@ -28,8 +28,8 @@ while (true) {
     after,
     instruction: {
       opcode: instruction[0],
-      intputA: instruction[1],
-      intputB: instruction[2],
+      inputA: instruction[1],
+      inputB: instruction[2],
       output: instruction[3],
     },
   })
@@ -110,8 +110,8 @@ capturesloop: for (const capture of captures) {
     const registers = [...capture.before]
     registers[capture.instruction.output] = instruction.exec(
       registers,
-      capture.instruction.intputA,
-      capture.instruction.intputB
+      capture.instruction.inputA,
+      capture.instruction.inputB
     )
 
     for (let i = 0; i < 4; i++) {
