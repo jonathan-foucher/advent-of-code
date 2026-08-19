@@ -135,12 +135,10 @@ if (!isTorch) {
 
 const bestTimes = new Map()
 
-const getShortestPath = (x, y, time, isTorch, isClimbingGear, path) => {
-  if (time + Math.abs(X_TARGET - x) + Math.abs(Y_TARGET - y) >= result) {
+const getShortestPath = (x, y, time, isTorch, isClimbingGear) => {
+  if (time + Math.abs(X_TARGET - x) + Math.abs(Y_TARGET - y) + TOOL_TIME * !isTorch >= result) {
     return
   }
-
-  const key = `${x}-${y}`
 
   if (x === X_TARGET && y === Y_TARGET) {
     if (isTorch === false) {
@@ -151,8 +149,8 @@ const getShortestPath = (x, y, time, isTorch, isClimbingGear, path) => {
     }
     return
   }
-  path.push(key)
 
+  const key = `${x}-${y}`
   const timeKey = `${key}-${isTorch + 2 * isClimbingGear}`
   const bestTime = bestTimes.get(timeKey)
   if (bestTime === undefined) {
@@ -168,20 +166,19 @@ const getShortestPath = (x, y, time, isTorch, isClimbingGear, path) => {
   for (const direction of DIRECTIONS) {
     const nextX = x + direction.deltaX
     const nextY = y + direction.deltaY
-    const nextKey = `${nextX}-${nextY}`
-
-    if (path.includes(nextKey) || nextX > MAX_X || nextY > MAX_Y || nextX < 0 || nextY < 0) {
+    if (nextX > MAX_X || nextY > MAX_Y || nextX < 0 || nextY < 0) {
       continue
     }
 
+    const nextKey = `${nextX}-${nextY}`
     const nextErosionLevel = regions.get(nextKey)
 
-    let deltaTime = 1
+    let nextTime = time + 1
     let nextIsTorch = isTorch
     let nextIsClimbingGear = isClimbingGear
     if (erosionLevel !== nextErosionLevel) {
       if (nextErosionLevel === 0 && isTorch === false && isClimbingGear === false) {
-        deltaTime += TOOL_TIME
+        nextTime += TOOL_TIME
 
         if (erosionLevel === 1) {
           nextIsTorch = false
@@ -191,7 +188,7 @@ const getShortestPath = (x, y, time, isTorch, isClimbingGear, path) => {
           nextIsClimbingGear = false
         }
       } else if (nextErosionLevel === 1 && isTorch === true) {
-        deltaTime += TOOL_TIME
+        nextTime += TOOL_TIME
 
         if (erosionLevel === 0) {
           nextIsTorch = false
@@ -201,7 +198,7 @@ const getShortestPath = (x, y, time, isTorch, isClimbingGear, path) => {
           nextIsClimbingGear = false
         }
       } else if (nextErosionLevel === 2 && isClimbingGear === true) {
-        deltaTime += TOOL_TIME
+        nextTime += TOOL_TIME
 
         if (erosionLevel === 0) {
           nextIsTorch = true
@@ -213,10 +210,10 @@ const getShortestPath = (x, y, time, isTorch, isClimbingGear, path) => {
       }
     }
 
-    getShortestPath(nextX, nextY, time + deltaTime, nextIsTorch, nextIsClimbingGear, [...path])
+    getShortestPath(nextX, nextY, nextTime, nextIsTorch, nextIsClimbingGear)
   }
 }
 
-getShortestPath(0, 0, 0, true, false, [])
+getShortestPath(0, 0, 0, true, false)
 
 console.log(result)
